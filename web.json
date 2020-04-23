@@ -1,0 +1,23 @@
+{
+   "id": 0123456789,
+   "user_id": 00001111,
+   "book_id": 00000101,
+   "book_name": "java program", 
+   "borrowed_time": "yyyy-mm-dd",
+   "return_time": "yyyy-mm-dd",
+   "available": [true, false],
+   "position": "A-1-2"
+}
+
+
+
+{
+   "id": 0123456789, (自动生成，无需手动输入)
+   "user_id": 00001111, （手动输入，二进制表示）
+   "book_id": 00000101, （手动输入，二进制表示）
+   "book_name": "java program", （书名，根据书的id自动生成，无需输入）
+   "borrowed_time": "yyyy-mm-dd", （时间框选择）
+   "return_time": "yyyy-mm-dd", （时间框选择）
+   "available": [true, false], （true表示在库，false表示不在库）
+   "position": "A-1-2" （A区1书架2层）
+}
