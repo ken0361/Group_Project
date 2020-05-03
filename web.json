@@ -2,12 +2,12 @@
    "query_id": 12345678,
    "user_id": 12345678,
    "book_id": 12345678,
-   "book_name": "java program", 
+   "book_name": "java program",
    "last_borrowed_time": "yyyy-mm-dd",
    "last_return_time": "yyyy-mm-dd",
    "last_warehouse-in_time": "yyyy-mm-dd",
    "book_status": ["borrowed","available","exceptional"],
-   "position": "A-1-2"
+   "position": "A-1-C-2"
 }
 
 
@@ -23,5 +23,5 @@
   "book_status": ["borrowed","available","exceptional"],
   （borrowed means has been borrrowed, available means can be borrowed,
    exceptional means return but not yet on bookshelves）
-  "position": "A-1-2" （Zone A Bookshelf 1 Floor 2）
+  "position": "A-1-C-2" （Zone A Bookshelf 1 Block C Floor 2）
 }
