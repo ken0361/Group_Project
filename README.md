@@ -3,12 +3,12 @@
 
 ## Portfolio
 ### - Team member :
-- Yazhuo LiS
-- Li Zhang
-- Yundong Shen
-- Min Lin : xe19102@bristol.ac.uk
-- Peiju Pan qo19500@bristol.ac.uk
 - Kuan ting Huang
+- Li Zhang
+- Min Lin: xe19102@bristol.ac.uk
+- Peiju Pan: qo19500@bristol.ac.uk
+- Yazhuo Li
+- Yundong Shen
 
 ### - Report
 - System Design
