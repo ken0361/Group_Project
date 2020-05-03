@@ -18,6 +18,6 @@
    "book_name": "java program", （Automatically generate based on id）
    "borrowed_time": "yyyy-mm-dd", （Time menu selection）
    "return_time": "yyyy-mm-dd", （Time menu selection）
-   "booked": [true, false], （true means booked, false means booked）
+   "booked": [true, false], （true means booked, false means not）
    "position": "A-1-2" （Zone A Bookshelf 1 Floor 2）
 }
