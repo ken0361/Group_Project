@@ -8,7 +8,7 @@
 - Min Lin: xe19102@bristol.ac.uk
 - Peiju Pan: qo19500@bristol.ac.uk
 - Yazhuo Li
-- Yundong Shen
+- Yundong Shen: nc19964@bristol.ac.uk
 
 ### - Report
 - System Design
