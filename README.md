@@ -4,7 +4,7 @@
 ## Portfolio
 ### - Team member :
 - Kuan ting Huang
-- Li Zhang: vf19496@163.com
+- Li Zhang: vf19496@bristol.ac.uk
 - Min Lin: xe19102@bristol.ac.uk
 - Peiju Pan: qo19500@bristol.ac.uk
 - Yazhuo Li
