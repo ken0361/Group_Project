@@ -1,5 +1,5 @@
 {
-   "id": 012345678,
+   "query_id": 012345678,
    "user_id": 012345678,
    "book_id": 012345678,
    "book_name": "java program", 
@@ -12,7 +12,7 @@
 
 
 {
-   "id": 012345678, (Automatically generate)
+   "query_id": 012345678, (Automatically generate)
    "user_id": 00001111, （Manual input）
    "book_id": 00000101, （Manual input）
    "book_name": "java program", （Automatically generate based on id）
