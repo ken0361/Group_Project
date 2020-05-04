@@ -1,0 +1,62 @@
+.background {
+  background-image: url(./background.jpg);
+
+    /* Full height */
+  background-size: cover;
+  min-width: 100%;
+  min-height: 100%;
+
+    /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.title {
+  font-family: fantasy;
+  font-weight: bold;
+
+  font-size: 1.5rem;
+  border-up: 2px solid pink;
+  border-left: 2px solid pink;
+  border-bottom: 2px solid pink;
+  border-right: 2px solid pink;
+  width: 80%;
+  text-align: center;
+  -moz-box-shadow: 4px 4px 5px #888888;
+  -ms-box-shadow: 4px 4px 5px #888888;
+  -webkit-box-shadow: 4px 4px 5px #888888;
+  -o-box-shadow: 4px 4px 5px #888888;
+  box-shadow: 4px 4px 5px #888888;
+  margin: 20px;
+}
+
+.login-form {
+  font-weight: bold;
+  font-size: 0.8rem;
+  width: 100%;
+  color: #CFDDF8;
+  width: 400px;
+  padding: 5px 20px 5px 20px;
+  margin: 15px 15px 15px 15px;
+  height: 100%;
+}
+
+h6{
+  font-size: 0.2rem;
+}
+
+.username{
+    margin-left: 5px;
+    margin-right: 5px;
+    border-left-width: 5px;
+    border-right-width: 5px;
+    height: 38px;
+    width: 344px;
+}
+
+.text1{
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+
