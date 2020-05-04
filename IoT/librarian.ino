@@ -128,7 +128,7 @@ void loop()
   // This is an example of using our timer class to
   // publish a message every 2000 milliseconds, as
   // set when we initalised the class above.
-  if( publishing_timer.isReady() && M5.BtnB.wasReleased()) {
+  /*if( publishing_timer.isReady() && M5.BtnB.wasReleased()) {
 
       // Prepare a string to send.
       // Here we include millis() so that we can
@@ -140,7 +140,7 @@ void loop()
       // Remember to reset your timer when you have
       // used it. This starts the clock again.
       publishing_timer.reset();
-  }
+  }*/
 
 
 
@@ -230,8 +230,6 @@ void callback(char* topic, byte* payload, unsigned int length) {
   M5.Lcd.println(">> message from computer: " );
   M5.Lcd.println( in_str );
 
-
-
 }
 
 void scanBook()
@@ -278,6 +276,11 @@ void titlePage()
 void drawLogo()
 {
     M5.Lcd.clear(BLACK);
+    M5.Lcd.setTextSize(3);
+    M5.Lcd.setTextColor(WHITE);
+    M5.Lcd.setCursor(120, 30);
+    M5.Lcd.println("Librarian");
+    delay(500);
     M5.Lcd.drawLine(40, 155, 100, 80, TFT_WHITE);
     delay(500);
     M5.Lcd.drawCircle(80, 160, 40, WHITE);
@@ -286,11 +289,11 @@ void drawLogo()
     delay(500);
     M5.Lcd.drawCircle(200, 160, 40, WHITE);
     delay(500);
-    M5.Lcd.drawLine(240, 160, 280, 80, TFT_WHITE);
+    M5.Lcd.drawLine(240, 160, 280, 90, TFT_WHITE);
     delay(500);
     M5.Lcd.fillCircle(80, 160, 40, WHITE);
     M5.Lcd.fillCircle(200, 160, 40, WHITE);
-    delay(600);
+    delay(1500);
 }
 
 
