@@ -1,20 +1,27 @@
 // Data focused on reading, writing and preparing data
-
-// Example use of abstract class for typedef
 static abstract class Status {
   static final String[] LIST = {
-    Status.OPEN, 
-    Status.CLOSED, 
-    Status.PROCESSING, 
-    Status.INTRANSIT, 
-    Status.DELIVERED
+    Status.AVAILABLE, 
+    Status.BORROWED, 
+    Status.EXCEPTIONAL, 
   };
-  static final String OPEN = "open";
-  static final String CLOSED = "closed";
-  static final String PROCESSING = "processing";
-  static final String INTRANSIT = "intransit";
-  static final String DELIVERED = "delivered";
+  static final String AVAILABLE = "available";
+  static final String BORROWED = "borrowed";
+  static final String EXCEPTIONAL = "exceptional";
 }
+
+static abstract class Area {
+  static final String[] LIST = {
+    Area.A, 
+    Area.B, 
+    Area.C, 
+  };
+  static final String A = "A";
+  static final String B = "B";
+  static final String C = "C";
+}
+
+
 // Example use of public class for metric as we use multiple (modular design)
 public class Metric {
   public String name;
@@ -27,7 +34,7 @@ public class Metric {
 }
 // Simulate SoC b/w API and Database
 private class Database {
-  int max_orders = 100;
+  int max_orders = 100; //max order number is 100;
   JSONObject[] orders = new JSONObject[max_orders];
   Database() {
   }
@@ -36,7 +43,7 @@ private class Database {
   }
 }
 
-// copy any JSON objects on disk into working memory
+// copy all JSON objects on disk into working memory
 void refreshData() {
   File dir;
   File[] files;
@@ -57,45 +64,75 @@ void refreshData() {
 }
 // this is our API class to ensure separation of concerns. User -> API -> DB
 public class OrderData {
+  
+  //get Orders By Status
   JSONObject[] getOrdersByStatus(String status) {
     JSONObject[] ret = new JSONObject[0];
     for (JSONObject order : db.orders) {
       if (order != null) {
-
-        if (status.contains(order.getString("order_status"))) {
+        if (status.contains(order.getString("book_status"))) {
           ret = (JSONObject[]) append(ret, order);
         }
       }
     }
     return ret;
   }
-  // API CALL 1
+  
+  //get Orders By Area
+  JSONObject[] getOrdersByArea(String area) {
+    JSONObject[] ret = new JSONObject[0];
+    for (JSONObject order : db.orders) {
+      if (order != null) {
+        if (area.contains(order.getString("area"))) {
+          ret = (JSONObject[]) append(ret, order);
+        }
+      }
+    }
+    return ret;
+  }
+  //get Orders By Area and status = available
+  JSONObject[] getOrdersByAreaAndStatus(String area) {
+    JSONObject[] ret = new JSONObject[0];
+    for (JSONObject order : db.orders) {
+      if (order != null) {
+        if (area.contains(order.getString("area"))) {
+          println("1111"+order.getString("book_status"));
+          if (order.getString("book_status").equals("available")) {
+          ret = (JSONObject[]) append(ret, order);
+          }
+        }
+      }
+    }
+    return ret;
+  }
+  
+  // get Order By book ID
   JSONObject getOrderByID(String id) {
     JSONObject ret = new JSONObject();
     for (JSONObject order : db.orders) {
       if (order != null) {
-        if (id.contains(order.getString("order_id"))) {
+        if (id.contains(order.getString("book_id"))) {
           ret = order;
         }
       }
     }
     return ret;
   }
-  // API CALL 2
+  // save order to database
   void saveOrdertoDB(JSONObject order) {
     if (order == null) {
       return;
     } else {
-      saveJSONObject(order, "data/" + order.getString("order_id") + ".json");
+      saveJSONObject(order, "data/" + order.getString("book_id") + ".json");
     }
   }
-  // API CALL 3
+  // update Order Status
   void updateOrderStatus(String id, String newstatus) {
     JSONObject[] ret = new JSONObject[db.max_orders()];
 
     JSONObject order = getOrderByID(id);
     // key, value
-    order.setString("order_status", newstatus);
-    client.publish("food_orders", order.toString());
+    order.setString("book_status", newstatus);
+    client.publish(MQTT_topic, order.toString());
   }
 }
