@@ -83,6 +83,14 @@ void setup()
 
     // connecting page
     M5.Lcd.clear(BLACK);
+
+    M5.Lcd.fillRect(0, 0, 320, 80, RED);
+    M5.Lcd.fillRect(10, 10, 300, 60, BLACK);
+    M5.Lcd.fillRect(0, 80, 320, 80, DARKGREY);
+    M5.Lcd.fillRect(10, 90, 300, 60, BLACK);
+    M5.Lcd.fillRect(0, 160, 320, 80, DARKGREEN);
+    M5.Lcd.fillRect(10, 170, 300, 60, BLACK);
+    
     M5.Lcd.setTextSize(2);
     M5.Lcd.setCursor( 10, 10 );
     M5.Lcd.setTextColor( WHITE );
@@ -227,6 +235,13 @@ void callback(char* topic, byte* payload, unsigned int length) {
   }
   Serial.println();
 
+  M5.Lcd.drawRect(0, 0, 320, 80, BLACK);
+  M5.Lcd.fillRect(0, 0, 320, 80, BLACK);
+  M5.Lcd.drawRect(0, 80, 320, 80, RED);
+  M5.Lcd.fillRect(0, 0, 320, 80, RED);
+  M5.Lcd.drawRect(0, 160, 320, 80, BLUE);
+  M5.Lcd.fillRect(0, 0, 320, 80, BLUE);
+  
   M5.Lcd.println(">> message from computer: " );
   M5.Lcd.println( in_str );
 
@@ -236,8 +251,8 @@ void scanBook()
 {
     M5.Lcd.clear(BLACK);
     M5.Lcd.setTextSize(3);
-    M5.Lcd.setTextColor(WHITE);
-    M5.Lcd.setCursor(130, 30);
+    M5.Lcd.setTextColor(YELLOW);
+    M5.Lcd.setCursor(120, 30);
     M5.Lcd.println("Scan");
     M5.Lcd.drawRect(100, 80, 120, 120, BLUE);
 
@@ -277,7 +292,7 @@ void drawLogo()
 {
     M5.Lcd.clear(BLACK);
     M5.Lcd.setTextSize(3);
-    M5.Lcd.setTextColor(WHITE);
+    M5.Lcd.setTextColor(YELLOW);
     M5.Lcd.setCursor(120, 30);
     M5.Lcd.println("Librarian");
     delay(500);
