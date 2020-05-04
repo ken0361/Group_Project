@@ -30,13 +30,6 @@ PubSubClient ps_client( wifi_client );
  *
  ******************************************************************************************/
 
-
-// If you are going to use UoB Guest network, you need to:
-// - first log in with your phone or laptop, accept terms.
-// - copy your devices MAC address values into this array
-// - on Linux/MAC, open the command line and type ifconfig.
-// - on Windows, open command line and type ipconfig
-// - On your phone, I have no idea (but it is possible)
 uint8_t guestMacAddress[6] = {0xA4, 0x02, 0xB9, 0xDF, 0x58, 0x04};
 
 // Wifi settings
@@ -73,49 +66,27 @@ Timer publishing_timer(2000);
  ******************************************************************************************/
 
 // Standard, one time setup function.
-void setup() {
-
-    // Setup M5 Stack, display some text
-    // on the screen.
-    // Note, other functions are using the
-    // LCD so expect errors if you delete this.
+void setup()
+{
     M5.begin();
     M5.Power.begin();
-    M5.Lcd.fillScreen(BLACK);
-    
-    M5.Lcd.setTextColor(YELLOW);
-    M5.Lcd.setTextSize(3);
-    M5.Lcd.setCursor(60, 60);
-    M5.Lcd.println("Library");
-    M5.Lcd.setCursor(60, 90);
-    M5.Lcd.println("Management");
-    M5.Lcd.setCursor(60, 120);
-    M5.Lcd.println("System");
-    delay(3000);
 
-    M5.Lcd.clear(BLACK);
-    M5.Lcd.drawLine(40, 155, 100, 20, TFT_RED);
-    delay(1000);
-    M5.Lcd.drawCircle(80, 160, 40, RED);
-    delay(1000);
-    M5.Lcd.drawLine(120, 160, 160, 160, TFT_RED);
-    delay(1000);
-    M5.Lcd.drawCircle(200, 160, 40, RED);
-    delay(1000);
-    M5.Lcd.drawLine(240, 160, 280, 20, TFT_RED);
-    delay(1000);
-    M5.Lcd.fillCircle(80, 160, 40, RED);
-    delay(1000);
-    M5.Lcd.fillCircle(200, 160, 40, RED);
-    delay(1000);
+    // title page
+    titlePage();
     
-  
+
+    // logo
+    drawLogo();
+
+    // scan book
+    scanBook();
+
+    // connecting page
     M5.Lcd.clear(BLACK);
     M5.Lcd.setTextSize(2);
     M5.Lcd.setCursor( 10, 10 );
     M5.Lcd.setTextColor( WHITE );
-    M5.Lcd.println("Reset, connecting...");
-
+    M5.Lcd.println("Reset, connecting ...");
 
     // Setup a serial port, good for debugging.
     // You can view data with the Arduino IDE
@@ -128,11 +99,7 @@ void setup() {
     // Use this with no wifi password set.
     // e.g., UoB Guest network.
     setupWifi();
-
-    // If you are using your own Wifi access
-    // point, you might need to use this call
-    // for a password protected connection.
-    //setupWifiWithPassword();
+    
 
     // Sets up a connection to hiveMQ.
     // Sets up a call back function to run
@@ -146,27 +113,29 @@ void setup() {
 
 
 // Standard, iterative loop function (main)
-void loop() {
-
+void loop()
+{
   // Leave this code here.  It checks that you are
   // still connected, and performs an update of itself.
-  if (!ps_client.connected()) {
+  if (!ps_client.connected())
+  {
     reconnect();
   }
+  
   ps_client.loop();
 
 
   // This is an example of using our timer class to
   // publish a message every 2000 milliseconds, as
   // set when we initalised the class above.
-  if( publishing_timer.isReady() ) {
+  if( publishing_timer.isReady() && M5.BtnB.wasReleased()) {
 
       // Prepare a string to send.
       // Here we include millis() so that we can
       // tell when new messages are arrive in hiveMQ
       String new_string = "hello?";
       new_string += millis();
-      publishMessage( new_string );
+      publishMessage( "hihi this is test !!" );
 
       // Remember to reset your timer when you have
       // used it. This starts the clock again.
@@ -206,7 +175,8 @@ void loop() {
 // publishMessage( "my text" + millis() );
 // So instead, pre-prepare a String variable, and then
 // pass that.
-void publishMessage( String message ) {
+void publishMessage( String message )
+{
 
   if( ps_client.connected() ) {
 
@@ -257,10 +227,70 @@ void callback(char* topic, byte* payload, unsigned int length) {
   }
   Serial.println();
 
-  M5.Lcd.print(" << Rx: " );
+  M5.Lcd.println(">> message from computer: " );
   M5.Lcd.println( in_str );
 
 
+
+}
+
+void scanBook()
+{
+    M5.Lcd.clear(BLACK);
+    M5.Lcd.setTextSize(3);
+    M5.Lcd.setTextColor(WHITE);
+    M5.Lcd.setCursor(130, 30);
+    M5.Lcd.println("Scan");
+    M5.Lcd.drawRect(100, 80, 120, 120, BLUE);
+
+    while(true)
+    {
+      delay(10);
+      if(M5.BtnB.wasReleased())
+      {
+        M5.Lcd.fillRect(100, 80, 120, 120, BLUE);
+        delay(2000);
+        break;
+      }
+      M5.update();
+    }
+}
+
+void titlePage()
+{
+    M5.Lcd.fillScreen(BLACK);
+    M5.Lcd.setTextColor(YELLOW);
+    M5.Lcd.setTextSize(3);
+    M5.Lcd.setCursor(60, 60);
+    M5.Lcd.println("Library");
+    M5.Lcd.setCursor(60, 90);
+    M5.Lcd.println("Management");
+    M5.Lcd.setCursor(60, 120);
+    M5.Lcd.println("System");
+    delay(500);
+    M5.Lcd.setTextSize(2);
+    M5.Lcd.setTextColor(WHITE);
+    M5.Lcd.setCursor(200, 160);
+    M5.Lcd.println("Group 7");
+    delay(2500);
+}
+
+void drawLogo()
+{
+    M5.Lcd.clear(BLACK);
+    M5.Lcd.drawLine(40, 155, 100, 80, TFT_WHITE);
+    delay(500);
+    M5.Lcd.drawCircle(80, 160, 40, WHITE);
+    delay(500);
+    M5.Lcd.drawLine(120, 160, 160, 160, TFT_WHITE);
+    delay(500);
+    M5.Lcd.drawCircle(200, 160, 40, WHITE);
+    delay(500);
+    M5.Lcd.drawLine(240, 160, 280, 80, TFT_WHITE);
+    delay(500);
+    M5.Lcd.fillCircle(80, 160, 40, WHITE);
+    M5.Lcd.fillCircle(200, 160, 40, WHITE);
+    delay(600);
 }
 
 
@@ -338,6 +368,11 @@ void reconnect() {
       // ... and resubscribe
       ps_client.subscribe( MQTT_sub_topic );
     } else {
+      if( M5.Lcd.getCursorY() > M5.Lcd.height() )
+      {
+        M5.Lcd.fillScreen( BLACK );
+        M5.Lcd.setCursor( 0, 10 );
+      }
       M5.Lcd.println(" - Coudn't connect to HiveMQ :(");
       M5.Lcd.println("   Trying again.");
       Serial.print("failed, rc=");
