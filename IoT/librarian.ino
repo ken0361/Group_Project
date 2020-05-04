@@ -234,13 +234,6 @@ void callback(char* topic, byte* payload, unsigned int length) {
     Serial.print((char)payload[i]);
   }
   Serial.println();
-
-  M5.Lcd.drawRect(0, 0, 320, 80, BLACK);
-  M5.Lcd.fillRect(0, 0, 320, 80, BLACK);
-  M5.Lcd.drawRect(0, 80, 320, 80, RED);
-  M5.Lcd.fillRect(0, 0, 320, 80, RED);
-  M5.Lcd.drawRect(0, 160, 320, 80, BLUE);
-  M5.Lcd.fillRect(0, 0, 320, 80, BLUE);
   
   M5.Lcd.println(">> message from computer: " );
   M5.Lcd.println( in_str );
