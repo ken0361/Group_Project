@@ -7,7 +7,7 @@
 - Li Zhang: vf19496@bristol.ac.uk
 - Min Lin: xe19102@bristol.ac.uk
 - Peiju Pan: qo19500@bristol.ac.uk
-- Yazhuo Li
+- Yazhuo Li：mo19348@bristol.ac.uk
 - Yundong Shen: nc19964@bristol.ac.uk
 
 ### - Report
