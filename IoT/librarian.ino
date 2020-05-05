@@ -219,7 +219,8 @@ void publishMessage( String message )
 // Note that, you will receive messages from yourself, if
 // you publish a message, activating this function.
 
-void callback(char* topic, byte* payload, unsigned int length) {
+void callback(char* topic, byte* payload, unsigned int length)
+{
 
   Serial.print("Message arrived [");
   Serial.print(topic);
@@ -242,15 +243,38 @@ void callback(char* topic, byte* payload, unsigned int length) {
   //M5.Lcd.println(">> message from computer: " );
   //M5.Lcd.println( in_str );
 
-  char delimiter[] = ", ";
+  splitAndPrintBookInfo(input);
+
+}
+
+void splitAndPrintBookInfo(char input[])
+{
+  char* bookName;
+  char* bookStatus;
+  char* positions;
+  char delimiter[] = ",";
   char* ptr = strtok(input, delimiter);
 
   while(ptr != NULL)
   {
-    M5.Lcd.println(ptr);
+    String temp = String(ptr);
+    if(temp.indexOf("book_name") >= 0)
+    {
+      bookName = ptr;
+    }
+    else if(temp.indexOf("book_status") >= 0)
+    {
+      bookStatus = ptr;
+    }
+    else if(temp.indexOf("position") >= 0)
+    {
+      positions = ptr;
+    }
     ptr = strtok(NULL, delimiter);
   }
-
+  M5.Lcd.println(bookName);
+  M5.Lcd.println(bookStatus);
+  M5.Lcd.println(positions);
 }
 
 void scanBook()
