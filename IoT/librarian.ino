@@ -226,17 +226,30 @@ void callback(char* topic, byte* payload, unsigned int length) {
   Serial.print("] ");
 
   String in_str = "";
+  char input[length+1];
 
   // Copy chars to a String for convenience.
   // Also prints to USB serial for debugging
   for (int i=0;i<length;i++) {
     in_str += (char)payload[i];
+    input[i] = (char)payload[i];
     Serial.print((char)payload[i]);
   }
+  in_str += '\0';
+  input[length] = '\0';
   Serial.println();
   
-  M5.Lcd.println(">> message from computer: " );
-  M5.Lcd.println( in_str );
+  //M5.Lcd.println(">> message from computer: " );
+  //M5.Lcd.println( in_str );
+
+  char delimiter[] = ", ";
+  char* ptr = strtok(input, delimiter);
+
+  while(ptr != NULL)
+  {
+    M5.Lcd.println(ptr);
+    ptr = strtok(NULL, delimiter);
+  }
 
 }
 
