@@ -4,10 +4,12 @@ static abstract class Status {
     Status.AVAILABLE, 
     Status.BORROWED, 
     Status.EXCEPTIONAL, 
+    Status.RESERVED,
   };
   static final String AVAILABLE = "available";
   static final String BORROWED = "borrowed";
   static final String EXCEPTIONAL = "exceptional";
+  static final String RESERVED = "reserved";
 }
 
 static abstract class Area {
@@ -15,10 +17,13 @@ static abstract class Area {
     Area.A, 
     Area.B, 
     Area.C, 
+    Area.D, 
+    
   };
   static final String A = "A";
   static final String B = "B";
   static final String C = "C";
+  static final String D = "D";
 }
 
 
@@ -96,7 +101,7 @@ public class OrderData {
     for (JSONObject order : db.orders) {
       if (order != null) {
         if (area.contains(order.getString("area"))) {
-          println("1111"+order.getString("book_status"));
+          //println("1111"+order.getString("book_status"));
           if (order.getString("book_status").equals("available")) {
           ret = (JSONObject[]) append(ret, order);
           }
@@ -119,20 +124,32 @@ public class OrderData {
     return ret;
   }
   // save order to database
-  void saveOrdertoDB(JSONObject order) {
+  void saveBooktoDB(JSONObject order) {
     if (order == null) {
       return;
     } else {
       saveJSONObject(order, "data/" + order.getString("book_id") + ".json");
     }
   }
+  
   // update Order Status
-  void updateOrderStatus(String id, String newstatus) {
-    JSONObject[] ret = new JSONObject[db.max_orders()];
+  void updateBookStatus(String id, String newstatus) {
+    JSONObject target = getOrderByID(id);
+    JSONObject newFile = new JSONObject();
 
-    JSONObject order = getOrderByID(id);
+    newFile.setString("book_id",id);
+    newFile.setString("book_name",target.getString("book_name"));
+    newFile.setString("author_name",target.getString("author_name"));
+    newFile.setString("book_status",newstatus);
+    newFile.setString("booked",target.getString("booked"));
+    newFile.setString("last_borrowed_time",target.getString("last_borrowed_time"));
+    newFile.setString("last_return_time",target.getString("last_return_time"));
+    newFile.setString("last_warehouse-in_time",target.getString("last_warehouse-in_time"));
+    newFile.setString("area",target.getString("area"));
+    newFile.setString("position",target.getString("position"));
+ 
+    saveBooktoDB(newFile);
     // key, value
-    order.setString("book_status", newstatus);
-    client.publish(MQTT_topic, order.toString());
+    client.publish(MQTT_topic_send, newFile.toString());//just publish status
   }
 }
