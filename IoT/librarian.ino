@@ -82,15 +82,7 @@ void setup()
     scanBook();
 
     // connecting page
-    M5.Lcd.clear(BLACK);
-
-    M5.Lcd.fillRect(0, 0, 320, 80, RED);
-    M5.Lcd.fillRect(10, 10, 300, 60, BLACK);
-    M5.Lcd.fillRect(0, 80, 320, 80, DARKGREY);
-    M5.Lcd.fillRect(10, 90, 300, 60, BLACK);
-    M5.Lcd.fillRect(0, 160, 320, 80, DARKGREEN);
-    M5.Lcd.fillRect(10, 170, 300, 60, BLACK);
-    
+    M5.Lcd.clear(BLACK);   
     M5.Lcd.setTextSize(2);
     M5.Lcd.setCursor( 10, 10 );
     M5.Lcd.setTextColor( WHITE );
@@ -272,9 +264,33 @@ void splitAndPrintBookInfo(char input[])
     }
     ptr = strtok(NULL, delimiter);
   }
-  M5.Lcd.println(bookName);
-  M5.Lcd.println(bookStatus);
-  M5.Lcd.println(positions);
+
+  printBookInfo(bookName, bookStatus, positions);
+}
+
+void printBookInfo(char* bookName, char* bookStatus, char* positions)
+{
+    M5.Lcd.clear(BLACK);
+    
+    M5.Lcd.fillRect(0, 0, 320, 80, RED);
+    M5.Lcd.fillRect(10, 10, 300, 60, BLACK);
+    M5.Lcd.fillRect(0, 80, 320, 80, DARKGREY);
+    M5.Lcd.fillRect(10, 90, 300, 60, BLACK);
+    M5.Lcd.fillRect(0, 160, 320, 80, DARKGREEN);
+    M5.Lcd.fillRect(10, 170, 300, 60, BLACK);
+    
+    M5.Lcd.setTextSize(2);
+    M5.Lcd.setTextColor(WHITE);
+    M5.Lcd.setCursor(10, 30);
+    M5.Lcd.println(bookName);
+
+    M5.Lcd.setTextColor(WHITE);
+    M5.Lcd.setCursor(10, 110);
+    M5.Lcd.println(bookStatus);
+
+    M5.Lcd.setTextColor(WHITE);
+    M5.Lcd.setCursor(10, 190);
+    M5.Lcd.println(positions);
 }
 
 void scanBook()
