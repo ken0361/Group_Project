@@ -78,9 +78,6 @@ void setup()
     // logo
     drawLogo();
 
-    // scan book
-    scanBook();
-
     // connecting page
     M5.Lcd.clear(BLACK);   
     M5.Lcd.setTextSize(2);
@@ -107,8 +104,8 @@ void setup()
     setupMQTT();
 
 
-    // Maybe you need to write your own
-    // setup code after this...
+    // scan book
+    scanBook();
 }
 
 
@@ -123,26 +120,6 @@ void loop()
   }
   
   ps_client.loop();
-
-
-  // This is an example of using our timer class to
-  // publish a message every 2000 milliseconds, as
-  // set when we initalised the class above.
-  /*if( publishing_timer.isReady() && M5.BtnB.wasReleased()) {
-
-      // Prepare a string to send.
-      // Here we include millis() so that we can
-      // tell when new messages are arrive in hiveMQ
-      String new_string = "hello?";
-      new_string += millis();
-      publishMessage( "hihi this is test !!" );
-
-      // Remember to reset your timer when you have
-      // used it. This starts the clock again.
-      publishing_timer.reset();
-  }*/
-
-
 
 
   // Just incase we print so much text we run off the
@@ -187,8 +164,9 @@ void publishMessage( String message )
       char msg[ message.length() ];
       message.toCharArray( msg, message.length() );
 
-      M5.Lcd.print(">> Tx: ");
+      M5.Lcd.println("send >>");
       M5.Lcd.println( message );
+      delay(2000);
 
       // Send
       ps_client.publish( MQTT_pub_topic, msg );
@@ -231,9 +209,11 @@ void callback(char* topic, byte* payload, unsigned int length)
   in_str += '\0';
   input[length] = '\0';
   Serial.println();
-  
-  //M5.Lcd.println(">> message from computer: " );
-  //M5.Lcd.println( in_str );
+
+  if(in_str.indexOf("send >>") >= 0)
+  {
+    return;
+  }
 
   splitAndPrintBookInfo(input);
 
@@ -298,18 +278,54 @@ void scanBook()
     M5.Lcd.clear(BLACK);
     M5.Lcd.setTextSize(3);
     M5.Lcd.setTextColor(YELLOW);
-    M5.Lcd.setCursor(120, 30);
+    M5.Lcd.setCursor(120, 20);
     M5.Lcd.println("Scan");
-    M5.Lcd.drawRect(100, 80, 120, 120, BLUE);
+    M5.Lcd.drawRect(100, 70, 120, 120, BLUE);
+    M5.Lcd.setTextSize(2);
+    M5.Lcd.setTextColor(WHITE);
+    M5.Lcd.setCursor(45, 220);
+    M5.Lcd.println("send");
+    M5.Lcd.setCursor(135, 220);
+    M5.Lcd.println("scan");
+    M5.Lcd.setCursor(230, 220);
+    M5.Lcd.println("cancel");
 
     while(true)
     {
       delay(10);
       if(M5.BtnB.wasReleased())
       {
-        M5.Lcd.fillRect(100, 80, 120, 120, BLUE);
-        delay(2000);
+        M5.Lcd.setTextColor(YELLOW);
+        M5.Lcd.setCursor(135, 220);
+        M5.Lcd.println("scan");
+        M5.Lcd.fillRect(100, 70, 120, 120, BLUE);
+      }
+      else if(M5.BtnA.wasReleased())
+      {   
+        //publishMessage( "\"book_id\": \"002\"" );
+        M5.Lcd.clear(BLACK);   
+        M5.Lcd.setTextSize(2);
+        M5.Lcd.setCursor( 10, 10 );
+        M5.Lcd.setTextColor( WHITE );
+        M5.Lcd.println("Waiting ...");
         break;
+      }
+      else if(M5.BtnC.wasReleased())
+      {
+        M5.Lcd.clear(BLACK);
+        M5.Lcd.setTextSize(3);
+        M5.Lcd.setTextColor(YELLOW);
+        M5.Lcd.setCursor(120, 20);
+        M5.Lcd.println("Scan");
+        M5.Lcd.drawRect(100, 70, 120, 120, BLUE);
+        M5.Lcd.setTextSize(2);
+        M5.Lcd.setTextColor(WHITE);
+        M5.Lcd.setCursor(45, 220);
+        M5.Lcd.println("send");
+        M5.Lcd.setCursor(135, 220);
+        M5.Lcd.println("scan");
+        M5.Lcd.setCursor(230, 220);
+        M5.Lcd.println("cancel");
       }
       M5.update();
     }
@@ -447,6 +463,7 @@ void reconnect() {
     }
   }
   M5.Lcd.println(" - Success!  Connected to HiveMQ\n\n");
+  delay(500);
 }
 
 String generateID() {
