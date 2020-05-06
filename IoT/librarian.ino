@@ -221,8 +221,8 @@ void callback(char* topic, byte* payload, unsigned int length)
 
 void splitAndPrintBookInfo(char input[])
 {
-  char* bookName;
-  char* bookStatus;
+  char* bookId;
+  char* booked;
   char* positions;
   char delimiter[] = ",";
   char* ptr = strtok(input, delimiter);
@@ -230,13 +230,13 @@ void splitAndPrintBookInfo(char input[])
   while(ptr != NULL)
   {
     String temp = String(ptr);
-    if(temp.indexOf("book_name") >= 0)
+    if(temp.indexOf("book_id") >= 0)
     {
-      bookName = ptr;
+      bookId = ptr;
     }
-    else if(temp.indexOf("book_status") >= 0)
+    else if(temp.indexOf("booked") >= 0)
     {
-      bookStatus = ptr;
+      booked = ptr;
     }
     else if(temp.indexOf("position") >= 0)
     {
@@ -245,32 +245,48 @@ void splitAndPrintBookInfo(char input[])
     ptr = strtok(NULL, delimiter);
   }
 
-  printBookInfo(bookName, bookStatus, positions);
+  printBookInfo(bookId, booked, positions);
 }
 
-void printBookInfo(char* bookName, char* bookStatus, char* positions)
+void printBookInfo(char* bookId, char* booked, char* positions)
 {
     M5.Lcd.clear(BLACK);
     
-    M5.Lcd.fillRect(0, 0, 320, 80, RED);
-    M5.Lcd.fillRect(10, 10, 300, 60, BLACK);
-    M5.Lcd.fillRect(0, 80, 320, 80, DARKGREY);
-    M5.Lcd.fillRect(10, 90, 300, 60, BLACK);
-    M5.Lcd.fillRect(0, 160, 320, 80, DARKGREEN);
-    M5.Lcd.fillRect(10, 170, 300, 60, BLACK);
-    
+    M5.Lcd.fillRect(0, 0, 320, 60, RED);
+    M5.Lcd.fillRect(10, 10, 300, 40, BLACK);
+    M5.Lcd.fillRect(0, 60, 320, 60, DARKGREY);
+    M5.Lcd.fillRect(10, 70, 300, 40, BLACK);
+    M5.Lcd.fillRect(0, 120, 320, 60, DARKGREEN);
+    M5.Lcd.fillRect(10, 130, 300, 40, BLACK);
+
     M5.Lcd.setTextSize(2);
     M5.Lcd.setTextColor(WHITE);
-    M5.Lcd.setCursor(10, 30);
-    M5.Lcd.println(bookName);
+    M5.Lcd.setCursor(45, 220);
+    M5.Lcd.println("send");
+    M5.Lcd.setCursor(135, 220);
+    M5.Lcd.println("scan");
+    M5.Lcd.setCursor(230, 220);
+    M5.Lcd.println("cancel");
 
-    M5.Lcd.setTextColor(WHITE);
-    M5.Lcd.setCursor(10, 110);
-    M5.Lcd.println(bookStatus);
+    M5.Lcd.setTextColor(YELLOW);
+    M5.Lcd.setCursor(22, 20);
+    M5.Lcd.println(bookId);
 
-    M5.Lcd.setTextColor(WHITE);
-    M5.Lcd.setCursor(10, 190);
+    M5.Lcd.setCursor(10, 80);
+    M5.Lcd.println(booked);
+
+    M5.Lcd.setCursor(10, 140);
     M5.Lcd.println(positions);
+
+    /*while(true)
+    {
+      delay(10);
+      if(M5.BtnA.wasReleased() || M5.BtnB.wasReleased() || M5.BtnC.wasReleased())
+      {
+        scanBook();
+      }
+      M5.update();
+    }*/
 }
 
 void scanBook()
