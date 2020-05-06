@@ -1,4 +1,3 @@
-
 import mqtt.*; 
 import controlP5.*;
 
@@ -42,15 +41,15 @@ void setup() {
     //label
     myTextlabelA = cp5.addTextlabel("labelA")
                     .setText("Library Management System")
-                    .setPosition(400,50)
+                    .setPosition(395,40)
                     .setColorValue(#2173DB)
-                    .setFont(createFont("Georgia",30))
+                    .setFont(createFont("Georgia",35))
                     ;
     myTextlabel1 = cp5.addTextlabel("label")
-                    .setText("A          B         C")
-                    .setPosition(100,500)
-                    .setColorValue(#BF1F3C)
-                    .setFont(createFont("Georgia",30))
+                    .setText("   A          B          C          D")
+                    .setPosition(185,566)
+                    .setColorValue(#C1CBF5)
+                    .setFont(createFont("Georgia",15))
                     ;               
   
 

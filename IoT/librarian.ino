@@ -78,19 +78,8 @@ void setup()
     // logo
     drawLogo();
 
-    // scan book
-    scanBook();
-
     // connecting page
-    M5.Lcd.clear(BLACK);
-
-    M5.Lcd.fillRect(0, 0, 320, 80, RED);
-    M5.Lcd.fillRect(10, 10, 300, 60, BLACK);
-    M5.Lcd.fillRect(0, 80, 320, 80, DARKGREY);
-    M5.Lcd.fillRect(10, 90, 300, 60, BLACK);
-    M5.Lcd.fillRect(0, 160, 320, 80, DARKGREEN);
-    M5.Lcd.fillRect(10, 170, 300, 60, BLACK);
-    
+    M5.Lcd.clear(BLACK);   
     M5.Lcd.setTextSize(2);
     M5.Lcd.setCursor( 10, 10 );
     M5.Lcd.setTextColor( WHITE );
@@ -115,8 +104,8 @@ void setup()
     setupMQTT();
 
 
-    // Maybe you need to write your own
-    // setup code after this...
+    // scan book
+    scanBook();
 }
 
 
@@ -131,26 +120,6 @@ void loop()
   }
   
   ps_client.loop();
-
-
-  // This is an example of using our timer class to
-  // publish a message every 2000 milliseconds, as
-  // set when we initalised the class above.
-  /*if( publishing_timer.isReady() && M5.BtnB.wasReleased()) {
-
-      // Prepare a string to send.
-      // Here we include millis() so that we can
-      // tell when new messages are arrive in hiveMQ
-      String new_string = "hello?";
-      new_string += millis();
-      publishMessage( "hihi this is test !!" );
-
-      // Remember to reset your timer when you have
-      // used it. This starts the clock again.
-      publishing_timer.reset();
-  }*/
-
-
 
 
   // Just incase we print so much text we run off the
@@ -195,8 +164,9 @@ void publishMessage( String message )
       char msg[ message.length() ];
       message.toCharArray( msg, message.length() );
 
-      M5.Lcd.print(">> Tx: ");
+      M5.Lcd.println("send >>");
       M5.Lcd.println( message );
+      delay(2000);
 
       // Send
       ps_client.publish( MQTT_pub_topic, msg );
@@ -219,25 +189,104 @@ void publishMessage( String message )
 // Note that, you will receive messages from yourself, if
 // you publish a message, activating this function.
 
-void callback(char* topic, byte* payload, unsigned int length) {
+void callback(char* topic, byte* payload, unsigned int length)
+{
 
   Serial.print("Message arrived [");
   Serial.print(topic);
   Serial.print("] ");
 
   String in_str = "";
+  char input[length+1];
 
   // Copy chars to a String for convenience.
   // Also prints to USB serial for debugging
   for (int i=0;i<length;i++) {
     in_str += (char)payload[i];
+    input[i] = (char)payload[i];
     Serial.print((char)payload[i]);
   }
+  in_str += '\0';
+  input[length] = '\0';
   Serial.println();
-  
-  M5.Lcd.println(">> message from computer: " );
-  M5.Lcd.println( in_str );
 
+  if(in_str.indexOf("send >>") >= 0)
+  {
+    return;
+  }
+
+  splitAndPrintBookInfo(input);
+
+}
+
+void splitAndPrintBookInfo(char input[])
+{
+  char* bookId;
+  char* booked;
+  char* positions;
+  char delimiter[] = ",";
+  char* ptr = strtok(input, delimiter);
+
+  while(ptr != NULL)
+  {
+    String temp = String(ptr);
+    if(temp.indexOf("book_id") >= 0)
+    {
+      bookId = ptr;
+    }
+    else if(temp.indexOf("booked") >= 0)
+    {
+      booked = ptr;
+    }
+    else if(temp.indexOf("position") >= 0)
+    {
+      positions = ptr;
+    }
+    ptr = strtok(NULL, delimiter);
+  }
+
+  printBookInfo(bookId, booked, positions);
+}
+
+void printBookInfo(char* bookId, char* booked, char* positions)
+{
+    M5.Lcd.clear(BLACK);
+    
+    M5.Lcd.fillRect(0, 0, 320, 60, RED);
+    M5.Lcd.fillRect(10, 10, 300, 40, BLACK);
+    M5.Lcd.fillRect(0, 60, 320, 60, DARKGREY);
+    M5.Lcd.fillRect(10, 70, 300, 40, BLACK);
+    M5.Lcd.fillRect(0, 120, 320, 60, DARKGREEN);
+    M5.Lcd.fillRect(10, 130, 300, 40, BLACK);
+
+    M5.Lcd.setTextSize(2);
+    M5.Lcd.setTextColor(WHITE);
+    M5.Lcd.setCursor(45, 220);
+    M5.Lcd.println("send");
+    M5.Lcd.setCursor(135, 220);
+    M5.Lcd.println("scan");
+    M5.Lcd.setCursor(230, 220);
+    M5.Lcd.println("cancel");
+
+    M5.Lcd.setTextColor(YELLOW);
+    M5.Lcd.setCursor(22, 20);
+    M5.Lcd.println(bookId);
+
+    M5.Lcd.setCursor(10, 80);
+    M5.Lcd.println(booked);
+
+    M5.Lcd.setCursor(10, 140);
+    M5.Lcd.println(positions);
+
+    /*while(true)
+    {
+      delay(10);
+      if(M5.BtnA.wasReleased() || M5.BtnB.wasReleased() || M5.BtnC.wasReleased())
+      {
+        scanBook();
+      }
+      M5.update();
+    }*/
 }
 
 void scanBook()
@@ -245,18 +294,54 @@ void scanBook()
     M5.Lcd.clear(BLACK);
     M5.Lcd.setTextSize(3);
     M5.Lcd.setTextColor(YELLOW);
-    M5.Lcd.setCursor(120, 30);
+    M5.Lcd.setCursor(120, 20);
     M5.Lcd.println("Scan");
-    M5.Lcd.drawRect(100, 80, 120, 120, BLUE);
+    M5.Lcd.drawRect(100, 70, 120, 120, BLUE);
+    M5.Lcd.setTextSize(2);
+    M5.Lcd.setTextColor(WHITE);
+    M5.Lcd.setCursor(45, 220);
+    M5.Lcd.println("send");
+    M5.Lcd.setCursor(135, 220);
+    M5.Lcd.println("scan");
+    M5.Lcd.setCursor(230, 220);
+    M5.Lcd.println("cancel");
 
     while(true)
     {
       delay(10);
       if(M5.BtnB.wasReleased())
       {
-        M5.Lcd.fillRect(100, 80, 120, 120, BLUE);
-        delay(2000);
+        M5.Lcd.setTextColor(YELLOW);
+        M5.Lcd.setCursor(135, 220);
+        M5.Lcd.println("scan");
+        M5.Lcd.fillRect(100, 70, 120, 120, BLUE);
+      }
+      else if(M5.BtnA.wasReleased())
+      {   
+        //publishMessage( "\"book_id\": \"002\"" );
+        M5.Lcd.clear(BLACK);   
+        M5.Lcd.setTextSize(2);
+        M5.Lcd.setCursor( 10, 10 );
+        M5.Lcd.setTextColor( WHITE );
+        M5.Lcd.println("Waiting ...");
         break;
+      }
+      else if(M5.BtnC.wasReleased())
+      {
+        M5.Lcd.clear(BLACK);
+        M5.Lcd.setTextSize(3);
+        M5.Lcd.setTextColor(YELLOW);
+        M5.Lcd.setCursor(120, 20);
+        M5.Lcd.println("Scan");
+        M5.Lcd.drawRect(100, 70, 120, 120, BLUE);
+        M5.Lcd.setTextSize(2);
+        M5.Lcd.setTextColor(WHITE);
+        M5.Lcd.setCursor(45, 220);
+        M5.Lcd.println("send");
+        M5.Lcd.setCursor(135, 220);
+        M5.Lcd.println("scan");
+        M5.Lcd.setCursor(230, 220);
+        M5.Lcd.println("cancel");
       }
       M5.update();
     }
@@ -394,6 +479,7 @@ void reconnect() {
     }
   }
   M5.Lcd.println(" - Success!  Connected to HiveMQ\n\n");
+  delay(500);
 }
 
 String generateID() {

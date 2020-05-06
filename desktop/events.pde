@@ -1,13 +1,15 @@
 // User interaction logic calling data (model) and views
 
-String expanded_order; //ID of order in focus
-String MQTT_topic = "book_orders";
-int button_state = 0;
+String book_details; //ID of order in focus
+String MQTT_topic_receive = "book_orders";
+String MQTT_topic_send = "send_info";
+int button_state1 = 0;
+int button_state2 = 0;
 int flag = 0;
 
 void clientConnected() {
     println("client connected to broker");
-    client.subscribe(MQTT_topic);
+    client.subscribe(MQTT_topic_receive);
 }
 
 void connectionLost() {
@@ -19,7 +21,7 @@ void messageReceived(String topic, byte[] payload) {
     if (json == null) {
         println("Order could not be parsed");
     } else {
-        api.saveOrdertoDB(json);
+        api.updateBookStatus(json.getString("book_id"), json.getString("book_status"));
         refreshData();
     }
     refreshDashboardData();
@@ -27,10 +29,15 @@ void messageReceived(String topic, byte[] payload) {
 
 void controlEvent(ControlEvent theEvent) {
     // expand order if clicked via API call
-    if (theEvent.getController().getValueLabel().getText().contains("O") == true) {
+    println("action: ");
+    println(theEvent.getController().getValueLabel().getText());
+    if (theEvent.getController().getValueLabel().getText().contains("Q") == true) {
         // call the api and get the JSON packet
-        expanded_order = api.getOrdersByStatus(theEvent.getController().getName())[(int) theEvent.getController().getValue()].getString("query_id");
-       // view.build_expanded_order(expanded_order);
+        println("name: " + theEvent.getController().getName());
+        println("[]: "+(int) theEvent.getController().getValue());
+        book_details = api.getOrdersByStatus(theEvent.getController().getName())[(int) theEvent.getController().getValue()].getString("book_id");
+        println("book_details: "+book_details);
+        view.build_book_details(book_details);
        
     }
     //println(theEvent.getController().getName());
@@ -54,46 +61,61 @@ void controlEvent(ControlEvent theEvent) {
 }
 
 public void tatal_amount() {
+  if (button_state2 > 2) {
   flag = 0;
-  //refreshDashboardData();
- // refreshDashboardData();
- //updateDashboardData();
+  refreshDashboardData();
   println("flag1:"+flag);
+  }
+  button_state2 = button_state2 + 1;
+  //
+ //updateDashboardData();
+  
 }
 
 public void available_amount() {
+  if (button_state2 > 2) {
   flag = 1;
- // refreshDashboardData();
-  //refreshDashboardData();
+  refreshDashboardData();
   println("flag2:"+flag);
+  }
+  button_state2 = button_state2 + 1;
 }
 
 
 
-/*
-
 // call back on button click
-public void accept(int theValue) {
-    if (button_state > 2) {
-        api.updateOrderStatus(expanded_order, Status.AVAILABLE);
+public void toAvailable() {
+    if (button_state1 > 3) {
+        api.updateBookStatus(book_details, Status.AVAILABLE);
+        refreshDashboardData();
     }
-    
-    
-    button_state = button_state + 1;
+    button_state1 = button_state1 + 1;
 }
 
 // call back on button click
-public void cancel(int theValue) {
-    if (button_state > 2) {
-        api.updateOrderStatus(expanded_order, Status.BORROWED);
+public void toBorrowed() {
+    if (button_state1 > 3) {
+        api.updateBookStatus(book_details, Status.BORROWED);
+        refreshDashboardData();
     }
-    button_state = button_state + 1;
+    button_state1 = button_state1 + 1;
 }
 
 // call back on button click
-public void ready(int theValue) {
-    if (button_state > 2) {
-        api.updateOrderStatus(expanded_order, Status.EXCEPTIONAL);
+public void toExceptional() {
+    if (button_state1 > 3) {
+        api.updateBookStatus(book_details, Status.EXCEPTIONAL);
+        refreshDashboardData();
     }
-    button_state = button_state + 1;
-}*/
+    button_state1 = button_state1 + 1;
+}
+
+// call back on button click
+public void toReserved() {
+  println("call reserved!!! ");
+    if (button_state1 > 3) {
+        api.updateBookStatus(book_details, Status.RESERVED);
+        refreshDashboardData();
+    }
+    button_state1 = button_state1 + 1;
+}
