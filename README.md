@@ -2,7 +2,7 @@
 (System description)
 
 
-## - Team member :
+## Team member :
 - Kuan ting Huang: ds19001@bristol.ac.uk
 - Li Zhang: vf19496@bristol.ac.uk
 - Min Lin: xe19102@bristol.ac.uk
