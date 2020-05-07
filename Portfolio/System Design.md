@@ -70,7 +70,7 @@ We use MQTT as our communication protocol because MQTT is a machine-to-machine (
 Our system requires multiple communications in different directions between different devices. Due to the complex communication design of our system, we decided to use multiple different subscriptions in order to clearly publish which messages to which application as following:
 
 ### (a) Desktop <——> web
-**Web  —— query ——> Desktop: ** 
+**Web  —— query ——> Desktop** 
 *Topic: "WEB_query"*
 
 There are three different conditions when a user query a book information from desktop.
@@ -86,6 +86,26 @@ There are three different conditions when a user query a book information from d
   "book_status": "null"
 }
 ```
+
+**Web  —— booking ——> Desktop** 
+*Topic: "WEB_query"*
+
+The booking request must include book_name and author_name, and the book_status would change to “booking”.
+```
+{
+  "query_id": "00000001",
+  "user_id": "stu190001",
+  "book_name": "java",
+  "author_name": "Andrew",
+  "book_status": "booking"
+}
+```
+
+**Desktop ——query_response——> web** 
+*Topic: "response_to_WEB"*
+
+If desktop could find the corresponding book, it would send the information to the web:
+
 
 
 ### (b) Desktop <——> web
