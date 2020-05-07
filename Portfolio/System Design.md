@@ -71,8 +71,8 @@ Our system requires multiple communications in different directions between diff
 
 ### (a) Desktop <——> web
 **Web  —— query ——> Desktop** 
-*Topic: "WEB_query"*
 
+*Topic: "WEB_query"*
 There are three different conditions when a user query a book information from desktop.
 1. only use book_name to query;
 2. only use author_name to query;
@@ -88,8 +88,8 @@ There are three different conditions when a user query a book information from d
 ```
 
 **Web  —— booking ——> Desktop** 
-*Topic: "WEB_query"*
 
+*Topic: "WEB_query"*
 The booking request must include book_name and author_name, and the book_status would change to “booking”.
 ```
 {
@@ -102,13 +102,29 @@ The booking request must include book_name and author_name, and the book_status 
 ```
 
 **Desktop ——query_response——> web** 
+
 *Topic: "response_to_WEB"*
-
 If desktop could find the corresponding book, it would send the information to the web:
+![response2web](images/response2web.png)
+Otherwise, the desktop would send { "book_name": "null" } to the web.
 
+**Desktop ——booking_response——> web** 
 
+*Topic: "response_to_WEB"*
+If desktop could find the corresponding book and the status of the book is available, it would change the "book_status" to "booked" and set the value of “booked” is "user_id", then send the updating information to the web.
 
-### (b) Desktop <——> web
+### (b) Desktop <——> M5 stack
+**M5 stack —— query ——> Desktop** 
+
+*Topic: "M5_query"*
+M5 stack using book_id to query the information of the book.
+
+**Desktop ——response——> M5 stack** 
+
+*Topic: "topic："response_to_M5""*
+M5 stack using book_id to query the information of the book.
+![response2m5](images/response2m5.png)
+Otherwise, the desktop would send { "book_id": "null" } to the M5 stack.
 
 ### (c) Desktop <——> web
 
