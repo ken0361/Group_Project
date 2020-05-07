@@ -116,13 +116,15 @@ The codes to complete the work of connecting Wi-Fi (UoB Guest) and MQTT are base
 Assuming that m5stack has a camera, the book_id of the book will be obtained after pressing the scan key. By passing the id to MQTT, the desktop is queried for information about this book. User can cancel this scan by pressing cancel key.
 
 #### 4. Send book id to MQTT & receive the message from the desktop by MQTT
-<img src="./images/M5stack_6.jpg" width = "250" height = "240" alt="desktop6" align=center />
+<img src="./images/M5stack_6.jpg" width = "250" height = "240" alt="desktop6" align=left />
 <img src="./images/M5stack_7.jpg" width = "250" height = "240" alt="desktop6" align=center />
 
 If the connection is successful, the screen will look like the left picture, if it fails, it will look like the right picture.
 M5stack sends book_id in form of "book_id": "012" to MQTT with topic "M5_query", and get message in form of json with topic "response_to_M5".
 
-<img src="./images/M5stack_splitAndPrint.png" width = "250" height = "240" alt="desktop6" align= center />
+<img src="./images/M5stack_splitAndPrint.png" width = "250" height = "240" alt="desktop6" align= left />
+
+After obtaining the message, this function will search for "book_id", "booked", and "position" in the string, and take them out and store them in the variables to process print function.
 
 #### 5. Display the book information
 <img src="./images/M5stack_8.jpg" width = "250" height = "240" alt="desktop6" align=center />
