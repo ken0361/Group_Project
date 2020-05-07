@@ -44,6 +44,12 @@ Web page, M5stack, desktop connect and send query or response by MQTT.
 ## Communication Protocols
     MQTT
     简单描述 画个图字就可以少写点
+We choose to use MQTT as our communication protocol because MQTT is a machine-to-machine (M2M)/"Internet of Things"  connectivity protocol. It was designed as an extremely lightweight publish/subscribe messaging transport. It is useful for connections with remote locations where a small code footprint is required and/or network bandwidth is at a premium. 
+
+Our system requires multiple communications in different directions between different devices. Due to the complex communication design of our system, we decided to use multiple different subscriptions in order to clearly publish which messages to which application as following:
+
+
+
    
 ## Data persistence mechanisms
     如何储存数据
