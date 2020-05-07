@@ -152,9 +152,6 @@ public class Dashboard_view {
       if (flag == 1 && count1 % 3 == 2) {
       chart.setVisible(true);
       }
-      
-        //chart.setTopic();
-       // chart.setVisible(false);
     }
     
     void build_button(){

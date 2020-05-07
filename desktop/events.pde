@@ -1,15 +1,27 @@
 // User interaction logic calling data (model) and views
 
 String book_details; //ID of order in focus
+
 String MQTT_topic_receive = "book_orders";
 String MQTT_topic_send = "send_info";
+//communicate with M5 stack
+String M5_query = "M5_query";
+String response_to_M5 = "response_to_M5";
+//communicate with web
+String WEB_query = "WEB_query";
+String response_to_WEB = "response_to_WEB";
+
 int button_state1 = 0;
 int button_state2 = 0;
+int button_state3 = 0;
 int flag = 0;
 
 void clientConnected() {
     println("client connected to broker");
+    //subscribe to the topic
     client.subscribe(MQTT_topic_receive);
+    client.subscribe(M5_query);
+    client.subscribe(WEB_query);
 }
 
 void connectionLost() {
@@ -17,13 +29,33 @@ void connectionLost() {
 }
 
 void messageReceived(String topic, byte[] payload) {
+  println("topic: "+topic);
+  println("json: "+payload);
     JSONObject json = parseJSONObject(new String(payload));
+    
+    println("queryId: "+json.getString("query_id"));
+    
+    
     if (json == null) {
         println("Order could not be parsed");
-    } else {
-        api.updateBookStatus(json.getString("book_id"), json.getString("book_status"));
-        refreshData();
+    } else if (topic.equals(WEB_query)) {
+      println("receive: "+json.toString());
+      String queryId = json.getString("query_id");
+      String userId = json.getString("user_id");
+      String bookName = json.getString("book_name");
+      String authorName = json.getString("author_name");
+      if (json.getString("book_status").equals("null")) {
+        api.returnBookInfo2Web(queryId,userId,bookName,authorName);
+      } else if (json.getString("book_status").equals("booking")) {
+        api.updateBookStatus2Booked(bookName, userId, queryId);
+      }
+    } else if (topic.equals(M5_query)) {
+      println("receive: "+json.toString());
+      String id = json.getString("book_id");
+      api.updateBookStatus(id, "available");
     }
+    
+    refreshData();
     refreshDashboardData();
 }
 
@@ -40,24 +72,7 @@ void controlEvent(ControlEvent theEvent) {
         view.build_book_details(book_details);
        
     }
-    //println(theEvent.getController().getName());
-   /* if (theEvent.getController().getName().equals("tatal_amount") == true ) {
-      println("name1: "+theEvent.getController().getName());
-      tatal_amount();
-    }
-    if (theEvent.getController().getName().equals("available_amount") == true) {
-          println("name2: "+theEvent.getController().getName());
-          available_amount();*/
-         /* if (flag == 0) {
-            println("flag from 0 to 1");
-            flag = 1;
-          }
-         else {
-           println("flag from 1 to 0");
-           flag = 0;
-         }*/
-    
-    
+   
 }
 
 public void tatal_amount() {
@@ -81,6 +96,13 @@ public void available_amount() {
   button_state2 = button_state2 + 1;
 }
 
+public void _exit_() {
+  if (button_state3 > 0) {
+   // exit();
+   flagView = 1;
+  }
+  button_state3 = button_state3 + 1;
+}
 
 
 // call back on button click
