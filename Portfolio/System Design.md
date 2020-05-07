@@ -99,8 +99,8 @@ After m5stack is turned on, it will be able to:
 
 
 (1)	display the theme and LOGO
-![architecture](images/M5stack_1.jpg =250x250)
-![architecture](images/M5stack_2.jpg =250x250)
+<img src="./images/M5stack_1.jpg" width = "250" height = "180" alt="desktop6" align=left />
+<img src="./images/M5stack_2.jpg" width = "250" height = "180" alt="desktop6" align=right />
 
 The theme and logo are dynamically displayed on the screen through the use of delay function.
 
