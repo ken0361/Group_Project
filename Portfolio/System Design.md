@@ -122,7 +122,38 @@ Assuming that m5stack has a camera, the book_id of the book will be obtained aft
 If the connection is successful, the screen will look like the left picture, if it fails, it will look like the right picture.
 M5stack sends book_id in form of "book_id": "012" to MQTT with topic "M5_query", and get message in form of json with topic "response_to_M5".
 
-<img src="./images/M5stack_splitAndPrint.png" width = "250" height = "240" alt="desktop6" align= center />
+```
+
+void splitAndPrintBookInfo(char input[])
+{
+  char* bookId;
+  char* booked;
+  char* positions;
+  char delimiter[] = ",";
+  char* ptr = strtok(input, delimiter);
+
+  while(ptr != NULL)
+  {
+    String temp = String(ptr);
+    if(temp.indexOf("book_id") >= 0)
+    {
+      bookId = ptr;
+    }
+    else if(temp.indexOf("booked") >= 0)
+    {
+      booked = ptr;
+    }
+    else if(temp.indexOf("position") >= 0)
+    {
+      positions = ptr;
+    }
+    ptr = strtok(NULL, delimiter);
+  }
+
+  printBookInfo(bookId, booked, positions);
+}
+
+```
 
 After obtaining the message, this function will search for "book_id", "booked", and "position" in the string, and take them out and store them in the variables to process print function.
 
@@ -142,7 +173,7 @@ If the "booked" column shows "user_id" instead of "null", the notification will 
 The librarian uses M5stack to scan a book placed in the return box, and after inquiries, gets information about the book. The "book_id" of this book is "Q10", "booked" is "null", and "position" is "B-1-C-2", so he put the book back to Zone B Bookshelf 1 Block C Floor 2. Next, he scanned another book and found that the "booked" of this book was "A1234". So, he pressed the send button to notify user A123 that the book he had booked had returned to the library.
    
 ## The evolution of UI Wireframes
-    UI的改良（但是我们没有用户反馈得编了TT）
+
 1. In the following part of the page design, the original design does not include the TORESERVED button. Only after the user makes a reservation on the web page, the book status may be changed to reserved, but the user reflects that if a user is already in the library, it is currently inconvenient Using the web page to log in to book, it should also be possible for the administrator to book directly on this page and increase the user id.
 
 ![desktop8](images/desktop8.png)
@@ -153,7 +184,7 @@ The librarian uses M5stack to scan a book placed in the return box, and after in
 
 3. After the actual operation of m5stack, it was found that the yellow words had better visual effects on the black screen. At the same time, it is more convenient for users to mark the description of the function on each button and make it change color after clicking.
 
-<img src="./images/M5stack_UI.png" width = "250" height = "240" alt="desktop6" align=center />
+<img src="./images/M5stack_UI.png" width = "250" height = "240" alt="desktop6" align=left />
 <img src="./images/M5stack_5.jpg" width = "250" height = "240" alt="desktop6" align=center />
 
    
