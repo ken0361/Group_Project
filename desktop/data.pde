@@ -123,6 +123,33 @@ public class OrderData {
     }
     return ret;
   }
+  
+  // get Order By book name
+  JSONObject getOrderByBookName(String bookName) {
+    JSONObject ret = new JSONObject();
+    for (JSONObject order : db.orders) {
+      if (order != null) {
+        if (bookName.contains(order.getString("book_name"))) {
+          ret = order;
+        }
+      }
+    }
+    return ret;
+  }
+  
+  // get Order By author name
+  JSONObject getOrderByAuthorName(String authorName) {
+    JSONObject ret = new JSONObject();
+    for (JSONObject order : db.orders) {
+      if (order != null) {
+        if (authorName.contains(order.getString("author_name"))) {
+          ret = order;
+        }
+      }
+    }
+    return ret;
+  }
+  
   // save order to database
   void saveBooktoDB(JSONObject order) {
     if (order == null) {
@@ -132,16 +159,79 @@ public class OrderData {
     }
   }
   
-  // update Order Status
-  void updateBookStatus(String id, String newstatus) {
-    JSONObject target = getOrderByID(id);
+  void returnBookInfo2Web(String queryId, String userId, String bookName, String authorName)
+  {
+    if (!bookName.equals("null") && authorName.equals("null")) {
+      JSONObject target = getOrderByBookName(bookName);
+      if (target.size() != 0) {
+        JSONObject returnInfo = returnInfo(target, queryId, userId);
+        client.publish(response_to_WEB, returnInfo.toString());
+      } else {
+        JSONObject returnInfo1 = new JSONObject();
+        returnInfo1.setString("book_name","null");
+        client.publish(response_to_WEB, returnInfo1.toString());
+      }
+    }
+    else if (bookName.equals("null") && !authorName.equals("null")) {
+      JSONObject target = getOrderByAuthorName(authorName);
+      if (target.size() != 0) {
+        JSONObject returnInfo = returnInfo(target, queryId, userId);
+        client.publish(response_to_WEB, returnInfo.toString());
+      } else {
+        JSONObject returnInfo = new JSONObject();
+        returnInfo.setString("book_name","null");
+        client.publish(response_to_WEB, returnInfo.toString());
+      }
+    }
+    else if (!bookName.equals("null") && !authorName.equals("null")) {
+      JSONObject target1 = getOrderByBookName(bookName);
+      JSONObject target2 = getOrderByAuthorName(authorName);
+      println("target1: "+target1.toString() + target1.size());
+      println("target2: "+target2.toString() + target2.size());
+      if (target1.equals(target2) && target1.size() != 0) {
+        JSONObject returnInfo = returnInfo(target1, queryId, userId);
+        client.publish(response_to_WEB, returnInfo.toString());
+      } else {
+        JSONObject returnInfo = new JSONObject();
+        returnInfo.setString("book_name","null");
+        client.publish(response_to_WEB, returnInfo.toString());
+      }
+    }
+  }
+  
+  JSONObject returnInfo(JSONObject target, String queryId, String userId) {
     JSONObject newFile = new JSONObject();
+    
+    newFile.setString("query_id", queryId);
+    newFile.setString("user_id", userId);
+    newFile.setString("book_name",target.getString("book_name"));
+    newFile.setString("book_id",target.getString("book_id"));
+    newFile.setString("author_name",target.getString("author_name"));
+    newFile.setString("book_status",target.getString("book_status"));
+    newFile.setString("booked",target.getString("booked"));
+    newFile.setString("last_borrowed_time",target.getString("last_borrowed_time"));
+    newFile.setString("last_return_time",target.getString("last_return_time"));
+    newFile.setString("last_warehouse-in_time",target.getString("last_warehouse-in_time"));
+    newFile.setString("area",target.getString("area"));
+    newFile.setString("position",target.getString("position"));
+    return newFile;
+  }
+  
+  // update Order Status
+  void updateBookStatus2Booked(String bookName, String userId, String queryId) {
+    JSONObject target = getOrderByBookName(bookName);
+    JSONObject newFile = new JSONObject();
+    if (!target.getString("book_status").equals("available")) {
+      newFile.setString("book_status", "null");
+      client.publish(response_to_WEB, newFile.toString());
+      return;
+    }
 
-    newFile.setString("book_id",id);
+    newFile.setString("book_id",target.getString("book_id"));
     newFile.setString("book_name",target.getString("book_name"));
     newFile.setString("author_name",target.getString("author_name"));
-    newFile.setString("book_status",newstatus);
-    newFile.setString("booked",target.getString("booked"));
+    newFile.setString("book_status", "booked");
+    newFile.setString("booked",userId);
     newFile.setString("last_borrowed_time",target.getString("last_borrowed_time"));
     newFile.setString("last_return_time",target.getString("last_return_time"));
     newFile.setString("last_warehouse-in_time",target.getString("last_warehouse-in_time"));
@@ -149,7 +239,53 @@ public class OrderData {
     newFile.setString("position",target.getString("position"));
  
     saveBooktoDB(newFile);
+    newFile.setString("query_id", queryId);
+    newFile.setString("user_id", userId);
+    
     // key, value
-    client.publish(MQTT_topic_send, newFile.toString());//just publish status
+    client.publish(response_to_WEB, newFile.toString());
+  }
+  
+  // update Order Status
+  void updateBookStatus(String id, String newstatus) {
+    JSONObject target = getOrderByID(id);
+    JSONObject newFile = new JSONObject();
+    if (target.size() == 0) {
+      newFile.setString("book_id","null");
+      client.publish(response_to_M5, newFile.toString());
+      return;
+    }
+    int y = year(),m = month(),d = day();  
+    String sy = str(y),sm = str(m),sd = str(d);
+    if(m<10){sm="0"+sm;}if(d<10){sd="0"+sd;}
+    String sysTime = sy+"-"+sm+"-"+sd;
+    println("time: "+sysTime);
+    if (newstatus.equals("borrowed")) {
+      newFile.setString("last_borrowed_time",sysTime);
+    } else {
+      newFile.setString("last_borrowed_time",target.getString("last_borrowed_time"));
+    }
+    if (newstatus.equals("available")) {
+      newFile.setString("last_warehouse-in_time",sysTime);
+    } else {
+      newFile.setString("last_warehouse-in_time",target.getString("last_warehouse-in_time"));
+    }
+    if (newstatus.equals("exceptional")) {
+      newFile.setString("last_return_time",sysTime);
+    } else {
+      newFile.setString("last_return_time",target.getString("last_return_time"));
+    }
+    
+    newFile.setString("book_id",id);
+    newFile.setString("book_status",newstatus);
+    newFile.setString("book_name",target.getString("book_name"));
+    newFile.setString("author_name",target.getString("author_name"));
+    newFile.setString("booked",target.getString("booked"));
+    newFile.setString("area",target.getString("area"));
+    newFile.setString("position",target.getString("position"));
+ 
+    saveBooktoDB(newFile);
+    // key, value
+    client.publish(response_to_M5, newFile.toString());
   }
 }
