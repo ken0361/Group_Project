@@ -36,6 +36,27 @@ Web page, M5stack, desktop connect and send query or response by MQTT.
     
 ## The design of 3 key systems
     详细描述三端 会用上代码和图
+    
+    
+    
+M5stack:
+
+After m5stack is turned on, it will be able to:
+(1)	display the theme and LOGO
+(2)	connect to Wi-Fi and MQTT
+(3)	scan the barcode of book
+(4)	send book id to MQTT & receive the message from the desktop by MQTT
+(5)	display the book information
+(6)	decide whether to send the reminder according to the status of the book
+
+
+
+(1)	display the theme and LOGO
+![architecture](images/M5stack_1.jpg)
+![architecture](images/M5stack_2.jpg)
+
+The theme and logo are dynamically displayed on the screen through the use of delay function.
+
    
 ## User stories
     分别描述三端用户可能产生的情况
