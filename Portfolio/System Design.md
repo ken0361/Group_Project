@@ -105,7 +105,10 @@ The booking request must include book_name and author_name, and the book_status 
 
 *Topic: "response_to_WEB"*
 If desktop could find the corresponding book, it would send the information to the web:
+<img src="./images/response2web.png" width = "300" height = "200" alt="response2web" align=center />
+
 ![response2web](images/response2web.png)
+
 Otherwise, the desktop would send { "book_name": "null" } to the web.
 
 **Desktop ——booking_response——> web** 
@@ -124,12 +127,12 @@ M5 stack using book_id to query the information of the book.
 *Topic: "topic："response_to_M5""*
 M5 stack using book_id to query the information of the book.
 ![response2m5](images/response2m5.png)
+
 Otherwise, the desktop would send { "book_id": "null" } to the M5 stack.
 
-### (c) Desktop <——> web
+### (c) M5 stack ——> Web
 
-
-
+If the booked field in the desktop reply message received by M5 stack after scanning a book is not empty, M5 stack would send a prompt message with the topic of the current user_id to the Wed (a user). The user receives the reminder and knows he can go to borrow the book now.
    
 ## Data persistence mechanisms
     如何储存数据
