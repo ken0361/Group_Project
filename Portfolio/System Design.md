@@ -35,8 +35,26 @@ User can register account, login, query and check the status of books or book th
 Web page, M5stack, desktop connect and send query or response by MQTT.
     
 ## The design of 3 key systems
-    详细描述三端 会用上代码和图
-    
+###   Desktop Application
+
+The desktop application of the library management system serves library administrators and is mainly used for library book status management and book situation visualization. The page mainly includes four parts, including an overview of books in the upper left corner, a list of book status classifications in the upper right corner, a display of book details in the middle right, and a book classification chart at the bottom.
+
+The library includes four areas: A / B / C / D. 
+There are four states in the book: 
+* available (currently available in the library), 
+* borrowed (already borrowed), 
+* exceptional (already returned but not placed in a suitable location), 
+* reserved (already reserved)
+
+#### 1. Overview of books
+
+The book overview section is divided into two categories for display. On the left is the display of the number of books (divided according to the four areas of the library), and on the right is the display of the number of books (the current four statuses of books are divided). When the book situation changes (new book storage or book status changes), this part can display the latest number distribution in real time.
+<img src="./images/desktop1.png" width = "900" height = "600" alt="desktop1" align=center />
+ 
+#### 2. Book status classification list
+
+According to books available, Borrowed, exceptional, reserved four categories of status display, click on the list to display all the book ID under a certain status. When the state of the book changes, this part can show the latest distribution in real time.
+<img src="./images/desktop2.png" width = "900" height = "600" alt="desktop1" align=center />
     
     
 M5stack:
