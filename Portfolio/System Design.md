@@ -99,12 +99,18 @@ After m5stack is turned on, it will be able to:
 
 
 #### 1. display the theme and LOGO:
-<img src="./images/M5stack_1.jpg" width = "250" height = "180" alt="desktop6" align=left />
+<img src="./images/M5stack_1.jpg" width = "250" height = "180" alt="desktop6" align=center />
 <img src="./images/M5stack_2.jpg" width = "250" height = "180" alt="desktop6" align=center />
 
 The theme and logo are dynamically displayed on the screen through the use of delay function.
 
 #### 2. connect to Wi-Fi and MQTT:
+<img src="./images/M5stack_3.jpg" width = "250" height = "180" alt="desktop6" align=center />
+
+The codes to complete the work of connecting Wi-Fi (UoB Guest) and MQTT are based on template. When communicating with desktop via MQTT, the topic for sending query information is "M5_query", and the topic for obtaining detailed book information is "response_to_M5". When communicating with web, the topic for sending notification is "booked_reminder".
+
+   
+   
    
 ## User stories
     分别描述三端用户可能产生的情况
