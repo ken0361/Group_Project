@@ -110,7 +110,7 @@ The theme and logo are dynamically displayed on the screen through the use of de
 The codes to complete the work of connecting Wi-Fi (UoB Guest) and MQTT are based on template. When communicating with desktop via MQTT, the topic for sending query information is "M5_query", and the topic for obtaining detailed book information is "response_to_M5". When communicating with web, the topic for sending notification is "booked_reminder".
 
 #### 3. Scan the barcode of book
-<img src="./images/M5stack_4.jpg" width = "250" height = "240" alt="desktop6" align=center />
+<img src="./images/M5stack_4.jpg" width = "250" height = "240" alt="desktop6" align=left />
 <img src="./images/M5stack_5.jpg" width = "250" height = "240" alt="desktop6" align=center />
 
 Assuming that m5stack has a camera, the book_id of the book will be obtained after pressing the scan key. By passing the id to MQTT, the desktop is queried for information about this book. User can cancel this scan by pressing cancel key.
