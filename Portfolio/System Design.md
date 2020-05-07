@@ -105,9 +105,7 @@ The booking request must include book_name and author_name, and the book_status 
 
 *Topic: "response_to_WEB"*
 If desktop could find the corresponding book, it would send the information to the web:
-<img src="./images/response2web.png" width = "300" height = "200" alt="response2web" align=center />
-
-![response2web](images/response2web.png)
+<img src="./images/response2web.png" width = "300" height = "230" alt="response2web" align=center />
 
 Otherwise, the desktop would send { "book_name": "null" } to the web.
 
@@ -126,7 +124,7 @@ M5 stack using book_id to query the information of the book.
 
 *Topic: "topic："response_to_M5""*
 M5 stack using book_id to query the information of the book.
-![response2m5](images/response2m5.png)
+<img src="./images/response2m5.png" width = "300" height = "230" alt="response2m5" align=center />
 
 Otherwise, the desktop would send { "book_id": "null" } to the M5 stack.
 
