@@ -122,7 +122,7 @@ Assuming that m5stack has a camera, the book_id of the book will be obtained aft
 If the connection is successful, the screen will look like the left picture, if it fails, it will look like the right picture.
 M5stack sends book_id in form of "book_id": "012" to MQTT with topic "M5_query", and get message in form of json with topic "response_to_M5".
 
-<img src="./images/M5stack_splitAndPrint.png" width = "250" height = "240" alt="desktop6" align= left />
+<img src="./images/M5stack_splitAndPrint.png" width = "250" height = "240" alt="desktop6" align= center />
 
 After obtaining the message, this function will search for "book_id", "booked", and "position" in the string, and take them out and store them in the variables to process print function.
 
