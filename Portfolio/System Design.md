@@ -98,12 +98,13 @@ After m5stack is turned on, it will be able to:
 
 
 
-(1)	display the theme and LOGO
+#### 1. display the theme and LOGO:
 <img src="./images/M5stack_1.jpg" width = "250" height = "180" alt="desktop6" align=left />
-<img src="./images/M5stack_2.jpg" width = "250" height = "180" alt="desktop6" align=right />
+<img src="./images/M5stack_2.jpg" width = "250" height = "180" alt="desktop6" align=center />
 
 The theme and logo are dynamically displayed on the screen through the use of delay function.
 
+#### 2. connect to Wi-Fi and MQTT:
    
 ## User stories
     分别描述三端用户可能产生的情况
