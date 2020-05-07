@@ -136,7 +136,10 @@ Divide the processed information into "book_id", "booked", and "position", and d
 If the "booked" column shows "user_id" instead of "null", the notification will be sent to the user (through MQTT with topic "user_id") after pressing the send key.
    
 ## User stories
-    分别描述三端用户可能产生的情况
+
+### Librarian (M5stack)
+
+The librarian uses M5stack to scan a book placed in the return box, and after inquiries, gets information about the book. The "book_id" of this book is "Q10", "booked" is "null", and "position" is "B-1-C-2", so he put the book back to Zone B Bookshelf 1 Block C Floor 2. Next, he scanned another book and found that the "booked" of this book was "A1234". So, he pressed the send button to notify user A123 that the book he had booked had returned to the library.
    
 ## The evolution of UI Wireframes
     UI的改良（但是我们没有用户反馈得编了TT）
@@ -147,6 +150,11 @@ If the "booked" column shows "user_id" instead of "null", the notification will 
 2. When designing this part, the button function was not added at the beginning, but the two pictures were directly displayed. After the user suggested, adding the button can increase the user interaction and make the page more concise. current state.
 
 ![desktop9](images/desktop9.png)
+
+3. After the actual operation of m5stack, it was found that the yellow words had better visual effects on the black screen. At the same time, it is more convenient for users to mark the description of the function on each button and make it change color after clicking.
+
+<img src="./images/M5stack_UI.png" width = "250" height = "240" alt="desktop6" align=center />
+<img src="./images/M5stack_5.jpg" width = "250" height = "240" alt="desktop6" align=center />
 
    
 ## Communication Protocols
