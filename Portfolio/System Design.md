@@ -52,8 +52,8 @@ After m5stack is turned on, it will be able to:
 
 
 (1)	display the theme and LOGO
-![architecture](images/M5stack_1.jpg | width=100)
-![architecture](images/M5stack_2.jpg | width=100)
+![architecture](images/M5stack_1.jpg =250x250)
+![architecture](images/M5stack_2.jpg =250x250)
 
 The theme and logo are dynamically displayed on the screen through the use of delay function.
 
@@ -65,11 +65,32 @@ The theme and logo are dynamically displayed on the screen through the use of de
     UI的改良（但是我们没有用户反馈得编了TT）
    
 ## Communication Protocols
-    MQTT
-    简单描述 画个图字就可以少写点
-We choose to use MQTT as our communication protocol because MQTT is a machine-to-machine (M2M)/"Internet of Things"  connectivity protocol. It was designed as an extremely lightweight publish/subscribe messaging transport. It is useful for connections with remote locations where a small code footprint is required and/or network bandwidth is at a premium. 
+We use MQTT as our communication protocol because MQTT is a machine-to-machine (M2M)/"Internet of Things"  connectivity protocol. It was designed as an extremely lightweight publish/subscribe messaging transport. It is useful for connections with remote locations where a small code footprint is required and/or network bandwidth is at a premium. 
 
 Our system requires multiple communications in different directions between different devices. Due to the complex communication design of our system, we decided to use multiple different subscriptions in order to clearly publish which messages to which application as following:
+
+### (a) Desktop <——> web
+**Web  —— query ——> Desktop: ** 
+*Topic: "WEB_query"*
+
+There are three different conditions when a user query a book information from desktop.
+1. only use book_name to query;
+2. only use author_name to query;
+3. use book_name and author_name to query, e.g:
+```
+{
+  "query_id": "00000001",
+  "user_id": "stu190001",
+  "book_name": "java",
+  "author_name": "Andrew",
+  "book_status": "null"
+}
+```
+
+
+### (b) Desktop <——> web
+
+### (c) Desktop <——> web
 
 
 
