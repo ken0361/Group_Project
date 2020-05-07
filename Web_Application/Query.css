@@ -14,9 +14,9 @@ html,body{
     }
     
     .card{
-    height: 450px;
+    /* height: 450px;
     margin-top: auto;
-    margin-bottom: auto;
+    margin-bottom: auto; */
     width: 350px;
     background-color: rgba(0,0,0,0.5);
     }
@@ -37,46 +37,15 @@ html,body{
     outline: 0 0 0 0  !important;
     box-shadow: 0 0 0 0 !important;
     }
-    
-    
-    .remember{
-    color: white;
-    }
-    
-    .remember input
-    {
-    width: 20px;
-    height: 20px;
-    margin-left: 15px;
-    margin-right: 5px;
-    }
-    
-    /* log in button */
-    .login_btn{
-    color: black;
-    background-color: white;
-    width: 100px;
-    }
-    
-    .login_btn:hover{
-    color: black;
-    background-color: #FCB8D3;
-    }
-    
-    .links{
-    color: white;
-    }
-    
-    .links a{
-    margin-left: 4px;
-    }
-    
+             
     /* navbar */
     nav{
         font-family: 'Kalam', cursive;
         color:#272425;
         background:rgba(2,146,252,0.1);
+        overflow: hidden;
       }
+      
     
     .nav-link {
         color: #E2DBDB;
@@ -104,11 +73,8 @@ html,body{
         top: -45px;
     }
     
-    .social-login {
-        text-align: center;
+    .booktxt {
+        color:white;
+        font: bolder;
     }
-    
-    .social-login span{
-        color: white;
-    }
-    
+
