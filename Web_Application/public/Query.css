@@ -1,4 +1,4 @@
-/* Login page style.css */
+/* Query page style.css */
 
 html,body{
     background: url(background.jpg) no-repeat center center fixed;
@@ -7,12 +7,7 @@ html,body{
     height: 100%;
     font-family:'Kalam', cursive;
     }
-    
-    .container{
-    height: 70%;
-    margin-left: 5%;
-    }
-    
+       
     .card{
     /* height: 450px;
     margin-top: auto;
@@ -78,3 +73,7 @@ html,body{
         font: bolder;
     }
 
+.bImg {
+    width: 200px;
+    width: 275px;
+}
