@@ -2,8 +2,8 @@ var user = "stu1968555";
 var bookObj = new Object();
 // Create a client instance, we create a random id so the broker will allow multiple sessions
 client_query = new Paho.MQTT.Client("broker.mqttdashboard.com", 8000, "clientId" + makeid(3) );
-var queryTopic = "test_Bookquery";
-var bookingTopic = "test_response_to_WEB";
+var queryTopic = "WEB_query";
+var bookingTopic = "response_to_WEB";
 
 // set callback handlers
 client_query.onConnectionLost = onConnectionLost;
@@ -46,7 +46,7 @@ function queryOrder() {
     onSubmit(JSON.stringify(newOrder));
   }
 
-  function bookingOrder() {
+function bookingOrder() {
     var x = document.getElementById("queryForm");
     var newOrder = {
         query_id: "B" + makeQueryid(7),
@@ -56,7 +56,7 @@ function queryOrder() {
         book_status:  "booking"
     };
     onSubmit(JSON.stringify(newOrder));
-  }
+}
 // called when the client connects
 function onSubmit(payload) {
     // Once a connection has been made, make a subscription and send a message.
@@ -89,15 +89,6 @@ function makeQueryid(length) {
     }
     return result;
 }
-
-// function updateTable(payload){
-//     var tr;
-//     tr = $('<tr/>');
-//     tr.append("<td>" + json[0].order_id + "</td>");
-//     tr.append("<td>" + json[1].status + "</td>");
-//     tr.append("<td>" + json[4].delivery_address + "</td>");
-//     $('table').append(tr);
-// }
 
 //Parse the recieved message from bookingTopic
 client_query.onMessageArrived = function (message) {
