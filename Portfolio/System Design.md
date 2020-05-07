@@ -24,7 +24,7 @@
 
 ## Architecture of the entire system  
 
-![architecture](Group_Project/Portfolio/images/architecture.png)
+![architecture](images/architecture.png)
 
 The main purpose of this project is to build a simple library management system, with the functions of user query and reservation. Also, the librarian can update the status of the book in real time, and notify the user that the borrowed book is now available.
 
