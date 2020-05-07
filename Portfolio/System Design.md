@@ -23,7 +23,18 @@
 
 
 ## Architecture of the entire system  
-    图 简单文字描述
+
+The main purpose of this project is to build a simple library management system, with the functions of user query and reservation. Also, the librarian can update the status of the book in real time, and notify the user that the borrowed book is now available.
+
+The following are the roles played by each character in this system:
+
+User can register account, login, query and check the status of books or book them on the web page.
+
+Librarian can scan the code on book to receive the message from administrator by m5stack, and return the book to the right bookshelf or notify the user who has booked this book.
+
+Administrator can response the query from user, send message to m5stack, and use various functions of the library management system interface to display information such as book status and inventory.
+
+Web page, M5stack, desktop connect and send query or response by MQTT. 
     
 ## The design of 3 key systems
     详细描述三端 会用上代码和图
