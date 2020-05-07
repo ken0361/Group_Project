@@ -45,19 +45,43 @@ There are four states in the book:
 * borrowed (already borrowed), 
 * exceptional (already returned but not placed in a suitable location), 
 * reserved (already reserved)
+<img src="./images/desktop1.png" width = "600" height = "250" alt="desktop1" align=center />
 
 #### 1. Overview of books
 
 The book overview section is divided into two categories for display. On the left is the display of the number of books (divided according to the four areas of the library), and on the right is the display of the number of books (the current four statuses of books are divided). When the book situation changes (new book storage or book status changes), this part can display the latest number distribution in real time.
-<img src="./images/desktop1.png" width = "900" height = "600" alt="desktop1" align=center />
+<img src="./images/desktop2.png" width = "200" height = "200" alt="desktop2" align=center />
  
 #### 2. Book status classification list
 
 According to books available, Borrowed, exceptional, reserved four categories of status display, click on the list to display all the book ID under a certain status. When the state of the book changes, this part can show the latest distribution in real time.
-<img src="./images/desktop2.png" width = "900" height = "600" alt="desktop1" align=center />
+<img src="./images/desktop3.png" width = "200" height = "200" alt="desktop3" align=center />
     
+#### 3. Book details display
+This part is used in conjunction with the book status classification list part. Click the ID of a book in the list to display the details of the book, including:
+Book_id, book_name, author_name, book_status, booked person id, area, position, last_borrowed_time, last_return_time and last_warehouse-in_time ten parts.
+
+Book details display. With the four buttons below (TOAVALIBLE, TOBORROWED, TOEXCEPTIONAL, TORESERVED), you can change the status of the currently displayed book. At the same time, the two parts of the book overview and the book status classification list will be updated simultaneously.
+<img src="./images/desktop4.png" width = "200" height = "200" alt="desktop4" align=center />
+
+In addition, by clicking the button, the corresponding time field of the book will also be changed.
+* Click TOAVALIBLE, the last_warehouse-in_time field of the current book is automatically changed to the current time;
+* Click TOBORROWED, the last_borrowed_time field of the current book is automatically changed to the current time;
+* Click TOEXCEPTIONAL, the last_return_time field of the current book is automatically changed to the current time;
+
+#### 4. Book classification chart
+
+The book classification chart is divided into left and right parts. The left shows the distribution of books in four different areas of the library, and the right shows the distribution of books in four different states.
+![desktop5](images/desktop5.png)
+
+
+The left part shows the total number of books in the four areas by default. If you click AVALIABLE_AMOUNT, it will switch to the number of books that can be lent out in the four areas. If you click TATAL_AMOUNT, it will return the total number of books in the area.
+<img src="./images/desktop6.png" width = "200" height = "150" alt="desktop6" align=center />
+<img src="./images/desktop7.png" width = "200" height = "150" alt="desktop7" align=center />
+
+In addition to the above-mentioned functions that can be directly seen, the desktop application of the library management system can communicate with the web page and M5Stack at the same time. After receiving the query or reservation information from the web page, it can automatically update and return the book information. After receiving the query information of M5Stack, it can also automatically update and return the book information.
     
-M5stack:
+### M5stack:
 
 After m5stack is turned on, it will be able to:
 (1)	display the theme and LOGO
@@ -81,6 +105,12 @@ The theme and logo are dynamically displayed on the screen through the use of de
    
 ## The evolution of UI Wireframes
     UI的改良（但是我们没有用户反馈得编了TT）
+1. In the following part of the page design, the original design does not include the TORESERVED button. Only after the user makes a reservation on the web page, the book status may be changed to reserved, but the user reflects that if a user is already in the library, it is currently inconvenient Using the web page to log in to book, it should also be possible for the administrator to book directly on this page and increase the user id.
+<img src="./images/desktop8.png" width = "200" height = "150" alt="desktop8" align=center />
+
+2. When designing this part, the button function was not added at the beginning, but the two pictures were directly displayed. After the user suggested, adding the button can increase the user interaction and make the page more concise. current state.
+<img src="./images/desktop9.png" width = "200" height = "150" alt="desktop9" align=center />
+
    
 ## Communication Protocols
 We use MQTT as our communication protocol because MQTT is a machine-to-machine (M2M)/"Internet of Things"  connectivity protocol. It was designed as an extremely lightweight publish/subscribe messaging transport. It is useful for connections with remote locations where a small code footprint is required and/or network bandwidth is at a premium. 
@@ -151,7 +181,23 @@ Otherwise, the desktop would send { "book_id": "null" } to the M5 stack.
 If the booked field in the desktop reply message received by M5 stack after scanning a book is not empty, M5 stack would send a prompt message with the topic of the current user_id to the Wed (a user). The user receives the reminder and knows he can go to borrow the book now.
    
 ## Data persistence mechanisms
-    如何储存数据
+This design is a lightweight design, so the database is not used, and the json file is used to maintain the book information. The json file of each book is as follows:
+<img src="./images/desktop10.png" width = "200" height = "200" alt="desktop10" align=center />
+![desktop10](images/desktop10.jpg)
+```
+"book_id": "Q04", —— Book label, starting with Q;
+"book_name": "C", —— Book name
+"author_name": "Neill", —— book author
+"book_status": "available", —— book status
+"booked": "stu190001", —— If the book is booked, the id of the booked user is displayed, otherwise null
+"area": "D", —— Area where the book is located
+"position": "D-1-C-2", —— The specific position of the book
+"last_borrowed_time": "2020-05-07", —— the time the book was last borrowed
+ "last_return_time": "2020-05-01", —— the time the book was last returned
+ "last_warehouse-in_time": "2020-05-07"-the time when the book was last put back in a fixed position
+```
+When you receive the reservation information on the web side, the update information on the M5 stack side, and the button operation on the desktop page, you can automatically update the corresponding fields of the json file.
+
    
 ## Web Technologies
     写网页用的技术和为什么选择
