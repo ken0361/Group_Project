@@ -123,7 +123,6 @@ If the connection is successful, the screen will look like the left picture, if 
 M5stack sends book_id in form of "book_id": "012" to MQTT with topic "M5_query", and get message in form of json with topic "response_to_M5".
 
 ```
-
 void splitAndPrintBookInfo(char input[])
 {
   char* bookId;
@@ -152,7 +151,6 @@ void splitAndPrintBookInfo(char input[])
 
   printBookInfo(bookId, booked, positions);
 }
-
 ```
 
 After obtaining the message, this function will search for "book_id", "booked", and "position" in the string, and take them out and store them in the variables to process print function.
