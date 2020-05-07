@@ -47,21 +47,18 @@ There are four states in the book:
 * reserved (already reserved)
 
 ![desktop1](images/desktop1.png)
-<img src="./images/desktop1.png" width = "600" height = "250" alt="desktop1" align=center />
 
 #### 1. Overview of books
 
 The book overview section is divided into two categories for display. On the left is the display of the number of books (divided according to the four areas of the library), and on the right is the display of the number of books (the current four statuses of books are divided). When the book situation changes (new book storage or book status changes), this part can display the latest number distribution in real time.
 
 ![desktop2](images/desktop2.png)
-<img src="./images/desktop2.png" width = "200" height = "200" alt="desktop2" align=center />
  
 #### 2. Book status classification list
 
 According to books available, Borrowed, exceptional, reserved four categories of status display, click on the list to display all the book ID under a certain status. When the state of the book changes, this part can show the latest distribution in real time.
 
 ![desktop3](images/desktop3.png)
-<img src="./images/desktop3.png" width = "200" height = "200" alt="desktop3" align=center />
     
 #### 3. Book details display
 This part is used in conjunction with the book status classification list part. Click the ID of a book in the list to display the details of the book, including:
@@ -70,7 +67,6 @@ Book_id, book_name, author_name, book_status, booked person id, area, position, 
 Book details display. With the four buttons below (TOAVALIBLE, TOBORROWED, TOEXCEPTIONAL, TORESERVED), you can change the status of the currently displayed book. At the same time, the two parts of the book overview and the book status classification list will be updated simultaneously.
 
 ![desktop4](images/desktop4.png)
-<img src="./images/desktop4.png" width = "200" height = "200" alt="desktop4" align=center />
 
 In addition, by clicking the button, the corresponding time field of the book will also be changed.
 * Click TOAVALIBLE, the last_warehouse-in_time field of the current book is automatically changed to the current time;
@@ -84,10 +80,9 @@ The book classification chart is divided into left and right parts. The left sho
 
 
 The left part shows the total number of books in the four areas by default. If you click AVALIABLE_AMOUNT, it will switch to the number of books that can be lent out in the four areas. If you click TATAL_AMOUNT, it will return the total number of books in the area.
-![desktop6](images/desktop6.png)
-![desktop7](images/desktop7.png)
-<img src="./images/desktop6.png" width = "200" height = "150" alt="desktop6" align=center />
-<img src="./images/desktop7.png" width = "200" height = "150" alt="desktop7" align=center />
+
+<img src="./images/desktop6.png" width = "250" height = "180" alt="desktop6" align=center />
+<img src="./images/desktop7.png" width = "250" height = "180" alt="desktop7" align=center />
 
 In addition to the above-mentioned functions that can be directly seen, the desktop application of the library management system can communicate with the web page and M5Stack at the same time. After receiving the query or reservation information from the web page, it can automatically update and return the book information. After receiving the query information of M5Stack, it can also automatically update and return the book information.
     
@@ -118,12 +113,10 @@ The theme and logo are dynamically displayed on the screen through the use of de
 1. In the following part of the page design, the original design does not include the TORESERVED button. Only after the user makes a reservation on the web page, the book status may be changed to reserved, but the user reflects that if a user is already in the library, it is currently inconvenient Using the web page to log in to book, it should also be possible for the administrator to book directly on this page and increase the user id.
 
 ![desktop8](images/desktop8.png)
-<img src="./images/desktop8.png" width = "200" height = "150" alt="desktop8" align=center />
 
 2. When designing this part, the button function was not added at the beginning, but the two pictures were directly displayed. After the user suggested, adding the button can increase the user interaction and make the page more concise. current state.
 
 ![desktop9](images/desktop9.png)
-<img src="./images/desktop9.png" width = "200" height = "150" alt="desktop9" align=center />
 
    
 ## Communication Protocols
@@ -196,8 +189,8 @@ If the booked field in the desktop reply message received by M5 stack after scan
    
 ## Data persistence mechanisms
 This design is a lightweight design, so the database is not used, and the json file is used to maintain the book information. The json file of each book is as follows:
-![desktop10](images/desktop10.png)
-<img src="./images/desktop10.png" width = "200" height = "200" alt="desktop10" align=center />
+
+<img src="./images/desktop10.png" width = "320" height = "250" alt="desktop10" align=center />
 
 ```
 "book_id": "Q04", —— Book label, starting with Q;
