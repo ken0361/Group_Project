@@ -28,14 +28,14 @@ PubSubClient ps_client( wifi_client );
 uint8_t guestMacAddress[6] = {0xA4, 0x02, 0xB9, 0xDF, 0x58, 0x04};
 
 // Wifi settings
-const char* ssid = "UoB Guest";                 // Set name of Wifi Network
-const char* password = "";                      // No password for UoB Guest
+const char* ssid = "UoB Guest";             
+const char* password = "";                     
 
 
 // MQTT Settings
-const char* MQTT_clientname = "SEGP_GROUP7"; // Make up a short name
-const char* MQTT_sub_topic = "response_to_M5"; // pub/sub topics
-const char* MQTT_pub_topic = "M5_query"; // You might want to create your own
+const char* MQTT_clientname = "SEGP_GROUP7";
+const char* MQTT_sub_topic = "response_to_M5";
+const char* MQTT_pub_topic = "M5_query";
 
 // Please leave this alone - to connect to HiveMQ
 const char* server = "broker.mqttdashboard.com";
@@ -74,22 +74,15 @@ void setup()
     M5.Lcd.setTextColor( WHITE );
     M5.Lcd.println("Reset, connecting ...");
 
-    // Setup a serial port, good for debugging.
-    // You can view data with the Arduino IDE
-    // serial monitor.
+    // Setup a serial port
     Serial.begin(115200);
     delay(10);
     Serial.println("*** RESET ***\n");
 
 
-    // Use this with no wifi password set.
-    // e.g., UoB Guest network.
     setupWifi();
     
 
-    // Sets up a connection to hiveMQ.
-    // Sets up a call back function to run
-    // which checks for new messages.
     setupMQTT();
 
 
@@ -101,8 +94,6 @@ void setup()
 // Standard, iterative loop function (main)
 void loop()
 {
-  // Leave this code here.  It checks that you are
-  // still connected, and performs an update of itself.
   if (!ps_client.connected())
   {
     reconnect();
@@ -116,9 +107,8 @@ void loop()
   
   ps_client.loop();
 
-  // Just incase we print so much text we run off the
-  // screen!  Clear screen, set cursor back to the top.
-  if( M5.Lcd.getCursorY() > M5.Lcd.height() ) {
+  if( M5.Lcd.getCursorY() > M5.Lcd.height() )
+  {
     M5.Lcd.fillScreen( BLACK );
     M5.Lcd.setCursor( 0, 10 );
   }
@@ -173,9 +163,8 @@ void callback(char* topic, byte* payload, unsigned int length)
   String in_str = "";
   char input[length+1];
 
-  // Copy chars to a String for convenience.
-  // Also prints to USB serial for debugging
-  for (int i=0;i<length;i++) {
+  for (int i=0;i<length;i++)
+  {
     in_str += (char)payload[i];
     input[i] = (char)payload[i];
     Serial.print((char)payload[i]);
