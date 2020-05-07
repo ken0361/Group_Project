@@ -124,7 +124,7 @@ M5 stack using book_id to query the information of the book.
 
 *Topic: "topic："response_to_M5""*
 M5 stack using book_id to query the information of the book.
-<img src="./images/response2m5.png" width = "300" height = "230" alt="response2m5" align=center />
+<img src="./images/response2m5.png" width = "260" height = "230" alt="response2m5" align=center />
 
 Otherwise, the desktop would send { "book_id": "null" } to the M5 stack.
 
