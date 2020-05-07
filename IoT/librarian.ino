@@ -19,11 +19,6 @@ WiFiClient wifi_client;
 PubSubClient ps_client( wifi_client );
 
 
-// Extra, created by SEGP team
-#include "Timer.h"
-
-
-
 /*******************************************************************************************
  *
  * Global Variables
@@ -39,21 +34,15 @@ const char* password = "";                      // No password for UoB Guest
 
 // MQTT Settings
 const char* MQTT_clientname = "SEGP_GROUP7"; // Make up a short name
-const char* MQTT_sub_topic = "SEGP_GROUP7"; // pub/sub topics
-const char* MQTT_pub_topic = "SEGP_GROUP7"; // You might want to create your own
+const char* MQTT_sub_topic = "response_to_M5"; // pub/sub topics
+const char* MQTT_pub_topic = "M5_query"; // You might want to create your own
 
 // Please leave this alone - to connect to HiveMQ
 const char* server = "broker.mqttdashboard.com";
 const int port = 1883;
 
 
-// Instance of a Timer class, which allows us
-// a basic task scheduling of some code.  See
-// it used in Loop().
-// See Timer.h for more details.
-// Argument = millisecond period to schedule
-// task.  Here, 2 seconds.
-Timer publishing_timer(2000);
+int M5_query_flag = 1;
 
 
 
@@ -118,9 +107,14 @@ void loop()
   {
     reconnect();
   }
+
+  if(M5_query_flag)
+  {
+    ps_client.publish( MQTT_pub_topic, "{\"book_id\": \"Q02\"}" );
+    M5_query_flag = 0;
+  }
   
   ps_client.loop();
-
 
   // Just incase we print so much text we run off the
   // screen!  Clear screen, set cursor back to the top.
@@ -140,18 +134,6 @@ void loop()
  *
  ******************************************************************************************/
 
-
-// Use this function to publish a message.  It currently
-// checks for a connection, and checks for a zero length
-// message.  Note, it doens't do anything if these fail.
-//
-// Note that, it publishes to MQTT_topic value
-//
-// Also, it doesn't seem to like a concatenated String
-// to be passed in directly as an argument like:
-// publishMessage( "my text" + millis() );
-// So instead, pre-prepare a String variable, and then
-// pass that.
 void publishMessage( String message )
 {
 
@@ -180,14 +162,6 @@ void publishMessage( String message )
 
 }
 
-// This is where we pick up messages from the MQTT broker.
-// This function is called automatically when a message is
-// received.
-//
-// Note that, it receives from MQTT_topic value.
-//
-// Note that, you will receive messages from yourself, if
-// you publish a message, activating this function.
 
 void callback(char* topic, byte* payload, unsigned int length)
 {
@@ -209,11 +183,6 @@ void callback(char* topic, byte* payload, unsigned int length)
   in_str += '\0';
   input[length] = '\0';
   Serial.println();
-
-  if(in_str.indexOf("send >>") >= 0)
-  {
-    return;
-  }
 
   splitAndPrintBookInfo(input);
 
@@ -278,15 +247,7 @@ void printBookInfo(char* bookId, char* booked, char* positions)
     M5.Lcd.setCursor(10, 140);
     M5.Lcd.println(positions);
 
-    /*while(true)
-    {
-      delay(10);
-      if(M5.BtnA.wasReleased() || M5.BtnB.wasReleased() || M5.BtnC.wasReleased())
-      {
-        scanBook();
-      }
-      M5.update();
-    }*/
+    ps_client.publish( booked, "your book is in library now." );
 }
 
 void scanBook()
@@ -318,7 +279,7 @@ void scanBook()
       }
       else if(M5.BtnA.wasReleased())
       {   
-        //publishMessage( "\"book_id\": \"002\"" );
+        //publishMessage( "\"book_id\": \"002\"" );        
         M5.Lcd.clear(BLACK);   
         M5.Lcd.setTextSize(2);
         M5.Lcd.setCursor( 10, 10 );
