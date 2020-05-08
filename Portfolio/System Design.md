@@ -168,7 +168,7 @@ If the "booked" column shows "user_id" instead of "null", the notification will 
 
 ### Librarian (M5stack)
 
-The librarian uses M5stack to scan a book placed in the return box, and after inquiries, gets information about the book. The "book_id" of this book is "Q10", "booked" is "null", and "position" is "B-1-C-2", so he put the book back to Zone B Bookshelf 1 Block C Floor 2. Next, he scanned another book and found that the "booked" of this book was "A1234". So, he pressed the send button to notify user A123 that the book he had booked had returned to the library.
+The librarian uses M5stack to scan a book placed in the return box, and after inquiries, gets information about the book. The "book_id" of this book is "Q10", "booked" is "null", and "position" is "B-1-C-2", so he put the book back to Zone B Bookshelf 1 Block C Floor 2. Next, he scanned another book and found that the "booked" of this book was "A1234". So, he pressed the send button to notify user A123 that the book he had booked had returned to the library.（这个地方应该写requirements，等于要说一下librarian在什么情况下需要用这个M5stack）
    
 ## The evolution of UI Wireframes
 
