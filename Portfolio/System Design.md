@@ -165,10 +165,22 @@ Divide the processed information into "book_id", "booked", and "position", and d
 If the "booked" column shows "user_id" instead of "null", the notification will be sent to the user (through MQTT with topic "user_id") after pressing the send key.
    
 ## User stories
+### Desktop
+Desktop allow the administers to manage the status of books and update the details when the book status is changed. Following are the example of user stories:
+
+When An administrator received a reserved book request, he can find the location and status of a certain books and pass the information to the librarian. Once the status of a borrowed and returned book are changed, they can update information so that the status can be shown to librarian and students.
+
+
 
 ### Librarian (M5stack)
 
-The librarian uses M5stack to scan a book placed in the return box, and after inquiries, gets information about the book. The "book_id" of this book is "Q10", "booked" is "null", and "position" is "B-1-C-2", so he put the book back to Zone B Bookshelf 1 Block C Floor 2. Next, he scanned another book and found that the "booked" of this book was "A1234". So, he pressed the send button to notify user A123 that the book he had booked had returned to the library.（这个地方应该写requirements，等于要说一下librarian在什么情况下需要用这个M5stack）
+The librarian uses M5stack to scan a book placed in the return box, and after inquiries, gets information about the book. The "book_id" of this book is "Q10", "booked" is "null", and "position" is "B-1-C-2", so he put the book back to Zone B Bookshelf 1 Block C Floor 2. Next, he scanned another book and found that the "booked" of this book was "A1234". So, he pressed the send button to notify user A123 that the book he had booked had returned to the library.
+
+### Web
+Web system is designed for students to query and received information from library instantly when they want to borrow and reserve a book. Following are the example of user stories:
+
+When students wants to look for a certain book they can log in the library management system with their students account. After they search for the book with the information they know, book’s status can be shown in the search result. If the book is available in the system, they can make a appointment in this system directly and go for the librarian to collect their book. If the book is unavailable in the system , they can choose to make a reserve, waiting for the system to notify them to collect the book.
+
    
 ## The evolution of UI Wireframes
 
