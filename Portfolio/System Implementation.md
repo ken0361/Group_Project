@@ -43,11 +43,13 @@ After implementing server.js, most work of our system were completed, these 3 su
     
 
 ## Evaluation designs
-    technique：Wizard of Oz
-    用户调查
-    lockdown限制
-    （剩下的limitation可能需要大家一起想一下）
-    （SWOt分析如果有时间我就做一下）
+The first evaluation technique was Wizard of Oz, which we conducted during workshops. This techniques enable us to observe how users would interact with this product by using role playing. This help us gather feedback and reaction easily and quickly so that we can apply these information to improve our paper prototype. The role players pointed out several shortcomings of our initial product model which provide us wide range of ideas to perfect our structure. However all the participants are peers, the feedback can be affected by personal emotion, which means they may be more tolerable to some of our disadvantages compared to strangers.
+
+We also turn to our tutors for advice when create our system idea, using their comment toward our system as one of criteria to judge our product. Unlike peer’s review, tutors’ advice tends to be more professional, which save us amount of time in solving some difficult problems. But this kind of suggestions only gave us the direction of modify our system, if we want to more specific in details, we must combine with more users’ feedback.
+
+On account of the factors mentioned above, user testing is necessary to the improvement of our product. Depend on the samples we gather at the beginning of our project, we worked well in build the original system. Nevertheless, due to the lockdown in March, we were unable to collect more subjects and forced to develop our rest part of system based on the previous data. Though our flat mates were willing to help us to test the system, the feedbacks were still limited. 
+
+
 
 ## Social and Ethical Implications
     关于用户调查和用户隐私方面 做了什么保证用户隐私 数据不被泄露
