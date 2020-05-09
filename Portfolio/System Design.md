@@ -163,6 +163,26 @@ Divide the processed information into "book_id", "booked", and "position", and d
 #### 6. Decide whether to send the reminder according to the status of the book
 
 If the "booked" column shows "user_id" instead of "null", the notification will be sent to the user (through MQTT with topic "user_id") after pressing the send key.
+
+### Web application:
+
+The web application is mainly designed for students who want to query the information of books in the certain library and make the reservation instantly. Also, the user could receive the notification from the librarian (M5stack) directly when the book return to the library immediately. 
+
+The website provides three parts:
+(1) Login and Registeration 
+(2) Query and Reserve books
+(3) Notifications
+
+#### 1. Login and Registration
+In order to entering the library management system, the user has to login their account and register a new account.
+
+#### 2.	Query and Reserve books
+In this page, the users can search and reserve books via MQTT communicating with the desktop. The topic for sending query request is “WEB_query ", and " response_to_WEB " is the topic for acquiring detailed nformation.
+
+By clicking the “Query” button, the user can search book with either its name or the author name. At the same time, it send the message to the desktop via MQTT and received the relative information. The received message is parsed and displayed on the web page.
+
+#### 3.	Notifications
+check the reservations and receive the notification when the book returned to the library (receive the message from stack)
    
 ## User stories
 ### Desktop
