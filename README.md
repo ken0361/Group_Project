@@ -1,6 +1,7 @@
 # **Library Management System**
 
 Do you ever wanted to find a book but it is always unavailable?
+
 Do you ever lost in hundreds of book shelves and found the book never in the correct position?
 
 Using our library management system can enable you to get instant notice when the book you need is available, and you do not need to find books shelf by shelf because the librarian will do it for you. This system can accept users’ query and reservation, pass them to the librarian and admin, then the user can be notified once the book is available. Librarian and administrator can also simply the management of data by using this system.
