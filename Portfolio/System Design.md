@@ -314,4 +314,14 @@ When you receive the reservation information on the web side, the update informa
 
    
 ## Web Technologies
-    写网页用的技术和为什么选择
+
+Web application of our entire system is used to be the main user interface. 
+
+### Client
+
+The main languages of our website are HTML5, CSS3 and JavaScript. The above three are the basic programming languages for the web design. Also, in order to build a static website rapidly, we use the prebuilt web components and structures in the Bootstrap 4 as the framework for our web development, such as navigation bars, tables and the cards.
+
+### Server
+
+Node.js is used to build the web server of our website. It is a famous web app development based on Chrome’s V8 JavaScript engine. The reason why we choose it is we used MQTT to deal with the main part of our data and simplify the whole project, so Node.js and ExpressJS applications meet our request of a simple web server. 
+
