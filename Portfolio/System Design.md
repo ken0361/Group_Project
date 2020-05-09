@@ -323,5 +323,5 @@ The main languages of our website are HTML5, CSS3 and JavaScript. The above thre
 
 ### Server
 
-Node.js is used to build the web server of our website. It is a famous web app development based on Chrome’s V8 JavaScript engine. The reason why we choose it is we used MQTT to deal with the main part of our data and simplify the whole project, so Node.js meets our necessary of a simple web server. 
+Node.js is used to build the web server of our website. It is a famous web app development based on Chrome’s V8 JavaScript engine. The reason why we choose it is we used MQTT to deal with the main part of our data and simplify the whole project, so Node.js and ExpressJS applications meet our request of a simple web server. 
 
