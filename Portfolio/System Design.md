@@ -183,14 +183,14 @@ In order to enter the library management system conveniently, the users have to 
 #### 2.	Query and Reserve books
 In this page, the users can search and reserve books via MQTT communicating with the desktop. The topic for sending query request is “WEB_query ", and " response_to_WEB " is the topic for acquiring detailed information.
 
-By clicking the “Query” button, the user can search book with either its name or the author name. At the same time, it send the message to the desktop via MQTT and received the relative information. The received message is parsed and displayed on the web page. Then the user can click the “Booking” button to submit the message to the desktop for making reservation. 
+By clicking the “Query” button, the user can search book with either the book name or the author name. At the same time, web application sends the JSON message to the desktop via MQTT and receives the certain book relative information. The received message is parsed and displayed on the web page for the users. Then the user can click the “Booking” button to submit the message to the desktop for making reservation or fresh the website to resend another query.
 
 <img src="./images/web4.jpg" width = "400" height = "300" align=center />
 <img src="./images/web5.jpg" width = "250" height = "300" align=center />
 <img src="./images/web6.jpg" width = "400" height = "300" align=center />
 
 #### 3.	Notifications
-This page will check the reservations from certain users and receive the notification when the book returned to the library (receive the message from M5stack directly). The table displays “Query_ID”, “Book name”, “Book status”, and notification for each booking order.
+If a user make some reservations and go to this page, they can check their reservation lists. Moreover, if the reserved book is changed the status from 'Borrowed' to 'Available'(that means when the book return to the library), then the web receive the JSON message from M5stack and send a notification to the user. The table displays “Query_ID”, “Book name”, “Book status”, and notification for each booking order.
 
 <img src="./images/web7.jpg" width = "400" height = "300" align=center />
    
