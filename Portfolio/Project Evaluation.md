@@ -3,9 +3,9 @@
 **contents**
 
 - [Reflective discussion](#reflective-discussion)
-- [future work](#future-work)
-- [practices of your group](#practices-of-your-group)
-- [how coronavirus has affected your project](#how-coronavirus-has-affected-your-project)
+- [future work](#Future-work)
+- [COVID-19 and teamwork](#COVID-19-and-teamwork)
+
 
 
 
@@ -18,6 +18,6 @@ However, even we think our product can come into use, there are still many limit
 Overall, our completed project is proved to be feasible and do have the ability to assist students raise the efficiency of finding books, nevertheless when it comes to reality , quite a lot problems are left to be solved. 
 
 
-## future work   
+## Future work   
 
 ## COVID-19 and teamwork
