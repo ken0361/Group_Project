@@ -28,3 +28,8 @@ As mentioned above, we still have a long way to go if we want to perfect our pro
 - If we can access to the library database, extend the MQTT communication
 
 ## COVID-19 and teamwork
+Despite COVID-19 caused a shock to our group work, we collaborate very well in distance. We have a good division of work to give the best play to everyone's superiorities. Two of our group members going back to China made the 7-hours jet lag a problem when we wanted to communicate in time. To solve this problem, we decided to have a face-to -face video meeting by Wechat weekly in 2pm Saturday. In addition to that we set a schedule for every stage to organize our time efficiently and guarantee the project was proceed as we planned. In each stage, everyone uploaded the files to github on time and we gave feedback and suggestions to each other after we check the updated files.
+
+During this period, different opinions sometimes appeared however this also gave us opportunities to find our defects and make up for them. Though COVID-19 narrowed the area where we could find potential participants for user testing, we asked our flatmates for help, test the three system separately and the gathered together to discuss how to improve when having meeting.
+
+It is a challenge that COVID-19 restrict our time and space, but we try our best to act as usual and finally succeed in completing this project.
