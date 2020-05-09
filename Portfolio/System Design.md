@@ -177,6 +177,8 @@ The website provides three parts:
 
 #### 1. Login and Registration
 In order to entering the library management system, the user has to login their account and register a new account.
+![web2](images/web2.jpg)
+![web3](images/web3.jpg)
 
 #### 2.	Query and Reserve books
 In this page, the users can search and reserve books via MQTT communicating with the desktop. The topic for sending query request is “WEB_query ", and " response_to_WEB " is the topic for acquiring detailed nformation.
