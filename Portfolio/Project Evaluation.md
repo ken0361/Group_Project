@@ -19,5 +19,12 @@ Overall, our completed project is proved to be feasible and do have the ability 
 
 
 ## Future work   
+As mentioned above, we still have a long way to go if we want to perfect our product. Here is a list of our future work
+- collect more feedback when the lockdown is ended.
+- Buy a camera and fix it to our M5stack
+- Conduct a market survey to see whether product can be accepted by public
+- Interview librarian and administrator to add more functions to M5stack and desktop system
+- Try to get access to the library database or build a database
+- If we can access to the library database, extend the MQTT communication
 
 ## COVID-19 and teamwork
