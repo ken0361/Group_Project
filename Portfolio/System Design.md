@@ -168,7 +168,7 @@ If the "booked" column shows "user_id" instead of "null", the notification will 
 
 The web application is mainly designed for students who want to query the information of books in the certain library and make the reservation instantly. Also, the user could receive the notification from the librarian (M5stack) directly when the book return to the library immediately. 
 
-<img src="./images/web1.png" width = "250" height = "180" align=center />
+<img src="./images/web1.jpg" width = "400" height = "300" alt="desktop6" align=left />
 
 The website provides three parts:
 (1) Login and Registeration 
@@ -177,8 +177,8 @@ The website provides three parts:
 
 #### 1. Login and Registration
 In order to entering the library management system, the user has to login their account and register a new account.
-<img src="./images/web2.png" width = "125" height = "180" align=center />
-<img src="./images/web3.png" width = "125" height = "180" align=center />
+<img src="./images/web2.png" width = "250" height = "400" alt="desktop6" align=center />
+<img src="./images/web3.png" width = "250" height = "400" alt="desktop6" align=center />
 
 #### 2.	Query and Reserve books
 In this page, the users can search and reserve books via MQTT communicating with the desktop. The topic for sending query request is “WEB_query ", and " response_to_WEB " is the topic for acquiring detailed nformation.
