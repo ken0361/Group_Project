@@ -3,7 +3,7 @@
 **contents**
 
 - [Reflective discussion](#reflective-discussion)
-- [future work](#Future-work)
+- [Future work](#Future-work)
 - [COVID-19 and teamwork](#COVID-19-and-teamwork)
 
 
