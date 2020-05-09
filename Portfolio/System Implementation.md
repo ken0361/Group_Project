@@ -36,9 +36,7 @@ In sprint3 our group optimized and integrated the final version of 3 systems als
 - Change the color of book information display on M5stack to make it elegant
 - Final test without bugs
 
-(implement server.js 需要web的同学写两三句做的过程)
-
-After implementing server.js, most work of our system were completed, these 3 subsystems were used by 3 different volunteers to observe whether the whole system could work as we expected. We collected the feedback and decided to make slight change on M5stack display. We use red box represents book id, blued box represents booked person id，green box represents book position, instead of three white boxes. With our final test running without bugs, the library management system is finished.
+As we mentioned in the web applications part, we used Node.js to build a local web server and use the port 3000 as our localhost. After implementing server.js, most work of our system were completed, these 3 subsystems were used by 3 different volunteers to observe whether the whole system could work as we expected. We collected the feedback and decided to make slight change on M5stack display. We use red box represents book id, blued box represents booked person id，green box represents book position, instead of three white boxes. With our final test running without bugs, the library management system is finished.
 
     
 
