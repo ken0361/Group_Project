@@ -183,12 +183,16 @@ In order to enter the library management system conveniently, the users have to 
 #### 2.	Query and Reserve books
 In this page, the users can search and reserve books via MQTT communicating with the desktop. The topic for sending query request is “WEB_query ", and " response_to_WEB " is the topic for acquiring detailed information.
 
-By clicking the “Query” button, the user can search book with either its name or the author name. At the same time, it sent the message to the desktop via MQTT and received the relative information. The received message is parsed and displayed on the web page.
+By clicking the “Query” button, the user can search book with either its name or the author name. At the same time, it send the message to the desktop via MQTT and received the relative information. The received message is parsed and displayed on the web page. Then the user can click the “Booking” button to submit the message to the desktop for making reservation. 
 
-
+<img src="./images/web4.jpg" width = "400" height = "300" align=center />
+<img src="./images/web5.jpg" width = "250" height = "300" align=center />
+<img src="./images/web6.jpg" width = "400" height = "300" align=center />
 
 #### 3.	Notifications
-This page will check the reservations from certain users and receive the notification when the book returned to the library (receive the message from M5stack)
+This page will check the reservations from certain users and receive the notification when the book returned to the library (receive the message from M5stack directly). The table displays “Query_ID”, “Book name”, “Book status”, and notification for each booking order.
+
+<img src="./images/web7.jpg" width = "400" height = "300" align=center />
    
 ## User stories
 ### Desktop
