@@ -116,6 +116,5 @@ $('#messages').append(message.payloadString);
     document.getElementById("area").innerHTML =  "Area: " + bookObj.area;
     document.getElementById("position").innerHTML =  "Position: " + bookObj.position;
     document.getElementById("bookStatus").innerHTML =  "Book Status: " + bookObj.book_status;
-    console.log(bookObj);
 };
       
