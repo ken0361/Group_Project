@@ -168,7 +168,7 @@ If the "booked" column shows "user_id" instead of "null", the notification will 
 
 The web application is mainly designed for students who want to query the information of books in the certain library and make the reservation instantly. Also, the user could receive the notification from the librarian (M5stack) directly when the book return to the library immediately. 
 
-<img src="./images/web1.jpg" align=center />
+![web1](images/web1.jpg)
 
 The website provides three parts:
 (1) Login and Registeration 
