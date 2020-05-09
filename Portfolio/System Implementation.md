@@ -52,6 +52,10 @@ On account of the factors mentioned above, user testing is necessary to the impr
 
 
 ## Social and Ethical Implications
-    关于用户调查和用户隐私方面 做了什么保证用户隐私 数据不被泄露
-    对于不使用这个系统的其他同学会不会造成损失
-    图书的预定会不会产生冲突
+As for the ethic of our project research, we referred to the ethic form offered by university to make sure our study do not against the guideline. Before the research, there would be an initial explanation of the study and an opportunity to ask questions. After that the participants would be asked for a consent. If they had any questions during our research, we would answer them until they figured out.
+There are no potential risks to our participant during all procedures. We would not ask for their personal information so their privacy would be protected. The device used in research is M5stack, smartphone and desktop, which would not be harmful to people’s physical and psychological health.
+In terms of personal feedback and reaction, all information will be recorded confidentially and only be used in a research report. 
+
+Though our product is not a fully finished yet, the data of student account and the book they borrow should be protected considering future development. We could add a statement before the user sign up that we would only use their account information in library system and the details of their personal information can only be stored by university and the user have opportunity whether to give the consent to our system.
+
+In terms of social issues, the aim of our product is to help student find books more efficiently and avoid them wasting more time in find the location of book among hundreds of book shelves. It is designed based on the university library system, which means even though some students do not use our product, the system would still provide the information they need. Besides, even the books are not borrowed via our system, the status in administrator database can also be updated instantly, so there would not be conflict that two students reserve a same book. 
