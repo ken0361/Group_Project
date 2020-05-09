@@ -166,7 +166,7 @@ If the "booked" column shows "user_id" instead of "null", the notification will 
 
 ### Web application:
 
-The responsive web application is mainly designed for students who want to query the information of books in the certain library and make the reservation instantly. Also, the user could receive the notification from the librarian (M5stack) directly when the book return to the library immediately. 
+Our responsive web application is mainly designed for students who want to query the information of books in the certain library and make their reservation instantly. Also, the user can receive the notification from the librarian (M5stack) directly when the book return to the library immediately. 
 
 <img src="./images/web1.jpg" width = "400" height = "300" align=center />
 
@@ -181,12 +181,14 @@ In order to enter the library management system conveniently, the users have to 
 <img src="./images/web3.jpg" width = "250" height = "400" align=center />
 
 #### 2.	Query and Reserve books
-In this page, the users can search and reserve books via MQTT communicating with the desktop. The topic for sending query request is “WEB_query ", and " response_to_WEB " is the topic for acquiring detailed nformation.
+In this page, the users can search and reserve books via MQTT communicating with the desktop. The topic for sending query request is “WEB_query ", and " response_to_WEB " is the topic for acquiring detailed information.
 
-By clicking the “Query” button, the user can search book with either its name or the author name. At the same time, it send the message to the desktop via MQTT and received the relative information. The received message is parsed and displayed on the web page.
+By clicking the “Query” button, the user can search book with either its name or the author name. At the same time, it sent the message to the desktop via MQTT and received the relative information. The received message is parsed and displayed on the web page.
+
+
 
 #### 3.	Notifications
-check the reservations and receive the notification when the book returned to the library (receive the message from stack)
+This page will check the reservations from certain users and receive the notification when the book returned to the library (receive the message from M5stack)
    
 ## User stories
 ### Desktop
