@@ -86,7 +86,7 @@ The left part shows the total number of books in the four areas by default. If y
 
 In addition to the above-mentioned functions that can be directly seen, the desktop application of the library management system can communicate with the web page and M5Stack at the same time. After receiving the query or reservation information from the web page, it can automatically update and return the book information. After receiving the query information of M5Stack, it can also automatically update and return the book information.
     
-### M5stack:
+### M5stack
 
 After m5stack is turned on, it will be able to:
 (1)	display the theme and LOGO
@@ -164,7 +164,7 @@ Divide the processed information into "book_id", "booked", and "position", and d
 
 If the "booked" column shows "user_id" instead of "null", the notification will be sent to the user (through MQTT with topic "user_id") after pressing the send key.
 
-### Web application:
+### Web application
 
 Our responsive web application is mainly designed for students who want to query the information of books in the certain library and make their reservation instantly. Also, the user can receive the notification from the librarian (M5stack) directly when the book return to the library immediately. 
 
@@ -202,7 +202,7 @@ When An administrator received a reserved book request, he can find the location
 
 
 
-### Librarian (M5stack)
+### M5stack
 
 The librarian uses M5stack to scan a book placed in the return box, and after inquiries, gets information about the book. The "book_id" of this book is "Q10", "booked" is "null", and "position" is "B-1-C-2", so he put the book back to Zone B Bookshelf 1 Block C Floor 2. Next, he scanned another book and found that the "booked" of this book was "A1234". So, he pressed the send button to notify user A123 that the book he had booked had returned to the library.
 
