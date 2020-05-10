@@ -26,11 +26,11 @@
 
 ![architecture](images/architecture.png)
 
-The main purpose of this project is to build a simple library management system, with the functions of user query and reservation. Also, the librarian can update the status of the book in real time, and notify the user that the borrowed book is now available.
+The primary purpose of this project is to build a simple library management system, with the functions of user query and reservation. Also, the librarian can update the status of the book in real-time, and notify the user that the borrowed book is now available.
 
 The following are the roles played by each character in this system:
 
-User can register account, login, query and check the status of books or book them on the web page. Librarian can scan the code on book to receive the message from administrator by m5stack, and return the book to the right bookshelf or notify the user who has booked this book. Administrator can response the query from user, send message to M5stack, and use various functions of the library management system interface to display information such as book status and inventory.
+User can register an account, log in, query and check the status of books or book them on the web page. The librarian can scan the code on the book to receive a message from the administrator by m5stack, then return the book to the right bookshelf or notify the user who has booked this book. The administrator can response the query from the user, send message to M5stack, and use various functions of the library management system interface to display information such as book status and inventory.
 
 Web page, M5stack, desktop connect and send query or response by MQTT.
     
@@ -50,18 +50,18 @@ There are four states in the book:
 
 #### 1. Overview of books
 
-The book overview section is divided into two categories for display. On the left is the display of the number of books (divided according to the four areas of the library), and on the right is the display of the number of books (the current four statuses of books are divided). When the book situation changes (new book storage or book status changes), this part can display the latest number distribution in real time.
+The book overview section is divided into two categories for display. On the left is the display of the number of books (divided according to the four areas of the library), and on the right is the display of the number of books (the current four statuses of books are divided). When the book situation changes (new book storage or book status changes), this part can display the latest number of distribution in real-time.
 
 ![desktop2](images/desktop2.png)
  
 #### 2. Book status classification list
 
-According to books available, borrowed, exceptional, reserved four categories of status display, click on the list to display all the book ID under a certain status. When the state of the book changes, this part can show the latest distribution in real time.
+According to books available, borrowed, exceptional, reserved four categories of status display, click on the list to display all the book ID under a certain status. When the state of the book changes, this part can show the latest distribution in real-time.
 
 ![desktop3](images/desktop3.png)
     
 #### 3. Book details display
-This part is used in conjunction with the book status classification list part. Click the ID of a book in the list to display the details of the book, including:
+This part is used in conjunction with the part of the book status classification list. Click the ID of a book in the list to display the details of the book, including:
 Book_id, book_name, author_name, book_status, booked person id, area, position, last_borrowed_time, last_return_time and last_warehouse-in_time ten parts.
 
 Book details display. With the four buttons below (TOAVALIBLE, TOBORROWED, TOEXCEPTIONAL, TORESERVED), you can change the status of the currently displayed book. At the same time, the two parts of the book overview and the book status classification list will be updated simultaneously.
@@ -84,7 +84,7 @@ The left part shows the total number of books in the four areas by default. If y
 <img src="./images/desktop6.png" width = "250" height = "180" alt="desktop6" align=center />
 <img src="./images/desktop7.png" width = "250" height = "180" alt="desktop7" align=center />
 
-In addition to the above-mentioned functions that can be directly seen, the desktop application of the library management system can communicate with the web page and M5Stack at the same time. After receiving the query or reservation information from the web page, it can automatically update and return the book information. After receiving the query information of M5Stack, it can also automatically update and return the book information.
+In addition to the functions mentioned above that can be directly seen, the desktop application of the library management system can communicate with the web page and M5Stack at the same time. After receiving the query or reservation information from the web page, it can automatically update and return the book information. After receiving the query information of M5Stack, it can also automatically update and return the book information.
     
 ### M5stack
 
@@ -107,7 +107,7 @@ The theme and logo are dynamically displayed on the screen through the use of de
 #### 2. Connect to Wi-Fi and MQTT
 <img src="./images/M5stack_3.jpg" width = "250" height = "240" alt="desktop6" align=center />
 
-The codes to complete the work of connecting Wi-Fi (UoB Guest) and MQTT are based on template. When communicating with desktop via MQTT, the topic for sending query information is "M5_query", and the topic for obtaining detailed book information is "response_to_M5". When communicating with web, the topic for sending notification is "booked_reminder".
+The codes to complete the work of connecting Wi-Fi (UoB Guest) and MQTT are based on the template. When communicating with desktop via MQTT, the topic for sending query information is "M5_query", and the topic for obtaining detailed book information is "response_to_M5". When communicating with the web, the topic for sending the notification is "booked_reminder".
 
 #### 3. Scan the barcode of book
 <img src="./images/M5stack_4.jpg" width = "250" height = "240" alt="desktop6" align=left />
@@ -119,8 +119,8 @@ Assuming that m5stack has a camera, the book_id of the book will be obtained aft
 <img src="./images/M5stack_6.jpg" width = "250" height = "240" alt="desktop6" align=left />
 <img src="./images/M5stack_7.jpg" width = "250" height = "240" alt="desktop6" align=center />
 
-If the connection is successful, the screen will look like the left picture, if it fails, it will look like the right picture.
-M5stack sends book_id in form of "book_id": "012" to MQTT with topic "M5_query", and get message in form of json with topic "response_to_M5".
+If the connection is successful, the screen will look like the left picture, and if it fails, it will look like the right picture.
+M5stack sends book_id in the form of "book_id": "012" to MQTT with the topic "M5_query", and get the message in form of json with topic "response_to_M5".
 
 ```
 void splitAndPrintBookInfo(char input[])
@@ -166,7 +166,7 @@ If the "booked" column shows "user_id" instead of "null", the notification will 
 
 ### Web application
 
-Our responsive web application is mainly designed for students who want to query the information of books in the certain library and make their reservation instantly. Also, the user can receive the notification from the librarian (M5stack) directly when the book return to the library immediately. The following picture is the landing page.
+Our responsive web application is mainly designed for students who want to query the information of books in a certain library and make their reservation instantly. Also, the user can receive the notification from the librarian (M5stack) directly when the book returns to the library immediately. The following picture is the landing page.
 
 <img src="./images/web1.jpg" width = "400" height = "300" align=center />
 
@@ -183,23 +183,22 @@ In order to enter the library management system conveniently, the users have to 
 #### 2.	Query and Reserve books
 In this page, the users can search and reserve books via MQTT communicating with the desktop. The topic for sending query request is “WEB_query ", and " response_to_WEB " is the topic for acquiring detailed information.
 
-By clicking the “Query” button, the user can search book with either the book name or the author name. At the same time, web application sends the JSON message to the desktop via MQTT and receives the certain book relative information. The received message is parsed and displayed on the web page for the users. Then the user can click the “Booking” button to submit the message to the desktop for making reservation or fresh the website to resend another query.
+By clicking the “Query” button, the user can search a book with either the book name or the author name. At the same time, web application sends the JSON message to the desktop via MQTT and receives certain book relative information. The received message is parsed and displayed on the web page for the users. Then the user can click the “Booking” button to submit the message to the desktop for making the reservation or fresh the website to resend another query.
 
 <img src="./images/web4.jpg" width = "400" height = "300" align=center />
 <img src="./images/web5.jpg" width = "250" height = "300" align=center />
 <img src="./images/web6.jpg" width = "400" height = "300" align=center />
 
 #### 3.	Notifications
-If a user make some reservations and go to this page, they can check their reservation lists. Moreover, if the reserved book is changed the status from 'Borrowed' to 'Available'(that means when the book return to the library), then the web receive the JSON message from M5stack and send a notification to the user. The table displays “Query_ID”, “Book name”, “Book status”, and notification for each booking order.
+If a user makes some reservations and goes to this page, they can check their reservation lists. Moreover, if the reserved book is changed the status from 'Borrowed' to 'Available' (that means when the book return to the library), then the web receive the JSON message from M5stack and send a notification to the user. The table displays "Query_ID", "Book name", "Book status", and notification for each booking order.
 
 <img src="./images/web7.jpg" width = "400" height = "300" align=center />
    
 ## User stories
 ### Desktop
-Desktop allow the administers to manage the status of books and update the details when the book status is changed. Following are the example of user stories:
+The desktop allows the administers to manage the status of books and update the details when the book status is changed. Following are the example of user stories:
 
-When An administrator received a reserved book request, he can find the location and status of a certain books and pass the information to the librarian. Once the status of a borrowed and returned book are changed, they can update information so that the status can be shown to librarian and students.
-
+When An administrator received a reserved book request, he can find the location and status of a certain book and pass the information to the librarian. Once the status of a borrowed and returned book is changed, they can update the information so that the status can be shown to librarian and students.
 
 
 ### M5stack
@@ -207,14 +206,14 @@ When An administrator received a reserved book request, he can find the location
 The librarian uses M5stack to scan a book placed in the return box, and after inquiries, gets information about the book. The "book_id" of this book is "Q10", "booked" is "null", and "position" is "B-1-C-2", so he put the book back to Zone B Bookshelf 1 Block C Floor 2. Next, he scanned another book and found that the "booked" of this book was "A1234". So, he pressed the send button to notify user A123 that the book he had booked had returned to the library.
 
 ### Web
-Web system is designed for students to query and received information from library instantly when they want to borrow and reserve a book. Following are the example of user stories:
+The web system is designed for students to query and received information from library instantly when they want to borrow and reserve a book. Following are the example of user stories:
 
-When students wants to look for a certain book they can log in the library management system with their students account. After they search for the book with the information they know, book’s status can be shown in the search result. If the book is available in the system, they can make a appointment in this system directly and go for the librarian to collect their book. If the book is unavailable in the system , they can choose to make a reserve, waiting for the system to notify them to collect the book.
+When students want to look for a certain book, they can log in the library management system with their student account. After they search for the book with the information they know, the book’s status can be shown in the search result. If the book is available in the system, they can make an appointment in this system directly and go for the librarian to collect their book. If the book is unavailable in the system, they can choose to make a reserve, waiting for the system to notify them to collect the book.
 
    
 ## The evolution of UI Wireframes
 
-1. In the following part of the page design, the original design does not include the TORESERVED button. Only after the user makes a reservation on the web page, the book status may be changed to reserved, but the user reflects that if a user is already in the library, it is currently inconvenient Using the web page to log in to book, it should also be possible for the administrator to book directly on this page and increase the user id.
+1. In the following part of the page design, the original design does not include the TORESERVED button. Only after the user makes a reservation on the web page, the book status may be changed to reserved. However, the user reflects that if a user is already in the library, it is currently inconvenient Using the web page to log in to book, it should also be possible for the administrator to book directly on this page and increase the user id.
 
 ![desktop8](images/desktop8.png)
 
@@ -222,7 +221,7 @@ When students wants to look for a certain book they can log in the library manag
 
 ![desktop9](images/desktop9.png)
 
-3. After the actual operation of m5stack, it was found that the yellow words had better visual effects on the black screen. At the same time, it is more convenient for users to mark the description of the function on each button and make it change color after clicking.
+3. After the actual operation of m5stack, it was found that the yellow words had better visual effects on the black screen. At the same time, it is more convenient for users to mark the description of the function on each button and make it change colour after clicking.
 
 <img src="./images/M5stack_UI.png" width = "250" height = "240" alt="desktop6" align=left />
 <img src="./images/M5stack_5.jpg" width = "250" height = "240" alt="desktop6" align=center />
