@@ -26,7 +26,7 @@ After solving the basic design problem, in sprint2, our group focused on impleme
 - Decide the detailed data and the direction of data transferring via MQTT
 - Test and simplify the form of data transferring and storage
 
-Sprint2 mainly focused on solving the communication bug and optimize the logical system settled in sprint1. For the Desktop system, according to the volunteers experience, it is vital to store the data which represents location, changing book status and the statistic of available/unavailable books by generating classes and objects. Our initial transfer plan between web and desktop is (  ), after testing, we simplify this process to (  ) in order to improve the efficiency.(其他方向如果有改进也可以简单写一下你们讨论的过程，例如如何把database简化掉的)
+Sprint2 mainly focused on solving the communication bug and optimize the logical system settled in sprint1. For the Desktop system, according to the volunteers experience, it is vital to store the data which represents location, changing book status and the statistic of available/unavailable books by generating classes and objects. （写一下过程，为什么以及如何把database简化掉的)
 
 ### Sprint3
 
