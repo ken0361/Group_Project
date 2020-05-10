@@ -30,7 +30,7 @@ The main purpose of this project is to build a simple library management system,
 
 The following are the roles played by each character in this system:
 
-User can register account, login, query and check the status of books or book them on the web page. Librarian can scan the code on book to receive the message from administrator by m5stack, and return the book to the right bookshelf or notify the user who has booked this book. Administrator can response the query from user, send message to m5stack, and use various functions of the library management system interface to display information such as book status and inventory.
+User can register account, login, query and check the status of books or book them on the web page. Librarian can scan the code on book to receive the message from administrator by m5stack, and return the book to the right bookshelf or notify the user who has booked this book. Administrator can response the query from user, send message to M5stack, and use various functions of the library management system interface to display information such as book status and inventory.
 
 Web page, M5stack, desktop connect and send query or response by MQTT.
     
@@ -56,7 +56,7 @@ The book overview section is divided into two categories for display. On the lef
  
 #### 2. Book status classification list
 
-According to books available, Borrowed, exceptional, reserved four categories of status display, click on the list to display all the book ID under a certain status. When the state of the book changes, this part can show the latest distribution in real time.
+According to books available, borrowed, exceptional, reserved four categories of status display, click on the list to display all the book ID under a certain status. When the state of the book changes, this part can show the latest distribution in real time.
 
 ![desktop3](images/desktop3.png)
     
@@ -166,7 +166,7 @@ If the "booked" column shows "user_id" instead of "null", the notification will 
 
 ### Web application
 
-Our responsive web application is mainly designed for students who want to query the information of books in the certain library and make their reservation instantly. Also, the user can receive the notification from the librarian (M5stack) directly when the book return to the library immediately. 
+Our responsive web application is mainly designed for students who want to query the information of books in the certain library and make their reservation instantly. Also, the user can receive the notification from the librarian (M5stack) directly when the book return to the library immediately. The following picture is the landing page.
 
 <img src="./images/web1.jpg" width = "400" height = "300" align=center />
 
