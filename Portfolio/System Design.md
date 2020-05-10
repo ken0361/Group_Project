@@ -227,6 +227,12 @@ When students wants to look for a certain book they can log in the library manag
 <img src="./images/M5stack_UI.png" width = "250" height = "240" alt="desktop6" align=left />
 <img src="./images/M5stack_5.jpg" width = "250" height = "240" alt="desktop6" align=center />
 
+4. At the time started to design our website, we tried to build a blank website which can transfer every input information to JSON format. 
+<img src="./images/web8.jpg" width = "300" height = "300" align=center />
+After that, we used Bootstrap 4 components to improve the web page and make it look more fancy.
+
+5. The user information, the query page and the order list were not seperated in the original page design of the web application as the following picture. However, we found that it is more convenient for the system management that dividing these functions into different parts. Also, it is simpler for the potential investors to comprehend our projects.
+<img src="./images/web9.jpg" width = "400" height = "300" align=center />
    
 ## Communication Protocols
 We use MQTT as our communication protocol because MQTT is a machine-to-machine (M2M)/"Internet of Things"  connectivity protocol. It was designed as an extremely lightweight publish/subscribe messaging transport. It is useful for connections with remote locations where a small code footprint is required and/or network bandwidth is at a premium. 
