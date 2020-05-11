@@ -226,18 +226,18 @@ When students want to look for a certain book, they can log in the library manag
 <img src="./images/M5stack_UI.png" width = "250" height = "240" alt="desktop6" align=left />
 <img src="./images/M5stack_5.jpg" width = "250" height = "240" alt="desktop6" align=center />
 
-4. At the time started to design our website, we tried to build a blank website which can transfer every input information to JSON format. After that, we used Bootstrap 4 components to improve the web page and make it look more fancy.
+4. At the time started to design our website, we tried to build a new website which can transfer every input information to JSON format. After that, we used Bootstrap 4 components to improve the web page and make it look fancier.
 
 <img src="./images/web8.jpg" width = "300" height = "300" align=center />
 
-5. The user information, the query page and the order list were not seperated in the original page design of the web application as the following picture. However, we found that it is more convenient for the system management that dividing these functions into different parts. Also, it is simpler for the potential investors to comprehend our projects.
-
+5.  The user information, the query page and the order list were not separated in the original page design of the web application as the following picture. However, we found that it is more convenient for the system management that dividing these functions into different parts. Also, it is simpler for potential investors to comprehend our projects.
 <img src="./images/web9.jpg" width = "400" height = "300" align=center />
    
 ## Communication Protocols
 We use MQTT as our communication protocol because MQTT is a machine-to-machine (M2M)/"Internet of Things"  connectivity protocol. It was designed as an extremely lightweight publish/subscribe messaging transport. It is useful for connections with remote locations where a small code footprint is required and/or network bandwidth is at a premium. 
 
-Our system requires multiple communications in different directions between different devices. Due to the complex communication design of our system, we decided to use multiple different subscriptions in order to clearly publish which messages to which application as following:
+Our system requires multiple communications in different directions between different devices. Due to the sophisticated communication design of our system, we decided to use multiple different subscriptions in order to  publish which messages to which application clearly as the following form:
+
 
 ### (a) Desktop <——> web
 **Web  —— query ——> Desktop** 
@@ -304,7 +304,7 @@ Otherwise, the desktop would send { "book_id": "null" } to the M5 stack.
 If the booked field in the desktop reply message received by M5 stack after scanning a book is not empty, M5 stack would send a prompt message with the topic of the current user_id to the Wed (a user). The user receives the reminder and knows he can go to borrow the book now.
    
 ## Data persistence mechanisms
-This design is a lightweight design, so the database is not used, and the json file is used to maintain the book information. The json file of each book is as follows:
+This design is lightweight , so the database is not used, and the JSON file is used to maintain the book information. The JSON file of each book is as follows:
 
 <img src="./images/desktop10.png" width = "320" height = "250" alt="desktop10" align=center />
 
@@ -329,9 +329,8 @@ Web application of our entire system is used to be the main user interface.
 
 ### Client
 
-The main languages of our website are HTML5, CSS3 and JavaScript. The above three are the basic programming languages for the web design. Also, in order to build a static website rapidly, we use the prebuilt web components and structures in the Bootstrap 4 as the framework for our web development, such as navigation bars, tables and the cards.
+The main languages of our website are HTML5, CSS3 and JavaScript. The above three are the basic programming languages for web design. Also, in order to build a static website rapidly, we use the prebuilt web components and structures in the Bootstrap 4 as the framework for our web development, such as navigation bars, tables and the cards.
 
-### Server
-
-Node.js is used to build the web server of our website. It is a famous web app development based on Chrome’s V8 JavaScript engine. The reason why we choose it is we used MQTT to deal with the main part of our data and simplify the whole project, so Node.js and ExpressJS applications meet our request of a simple web server. 
+### server
+Node.js is used to build the webserver of our website. It is a famous web app development based on Chrome’s V8 JavaScript engine. The reason why we choose it is we used MQTT to deal with the main part of our data and simplify the whole project, so Node.js and ExpressJS applications meet our request of a simple web server. 
 
